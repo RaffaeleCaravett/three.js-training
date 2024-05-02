@@ -14,4 +14,41 @@ const loader = new GLTFLoader();
 renderer.setSize( window.innerWidth, window.innerHeight );
 col.appendChild( renderer.domElement );
 
-console.log(col)
+let grid = new THREE.GridHelper(40,40)
+scene.add(grid)
+const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
+grid.position.setY(15)
+cube.position.setY(15)
+camera.position.x = 0;
+camera.position.y = 20;
+camera.position.z = 50;
+let ambientLight = new THREE.AmbientLight()
+let mouseX =0;
+let mouseY=0;
+window.addEventListener('mousemove',(e)=>{
+   e.preventDefault()
+   
+    if(e.movementX>0){
+    cube.rotateY(-0.01)
+   }
+   else 
+   {
+    cube.rotateY(0.0)
+   }
+   if(e.movementY>0){
+    cube.rotateX(0.01)
+   }else{
+    cube.rotateX(-0.01)
+   }
+ 
+})
+
+
+function animate() {
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+}
+animate()
