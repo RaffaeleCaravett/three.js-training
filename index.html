@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Three.js training</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<script type="importmap">
+    {
+        "imports": {
+            "three": "./node_modules/three/build/three.module.js",
+            "orbitControls": "./node_modules/three/examples/jsm/controls/OrbitControls.js",
+            "gltfLoader": "./node_modules/three/examples/jsm/loaders/GLTFLoader.js"
+        }
+    }
+</script>
 </head>
 <body>
   <div class="container text-center py-5">
@@ -18,9 +27,8 @@
     </div>
    </div>
 </div>
+  <script type="module" src="./index.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script type="module" src="./index.js"></script>
 </body>
 </html>
