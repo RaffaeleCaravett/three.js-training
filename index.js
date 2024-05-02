@@ -1,4 +1,9 @@
-import * as THREE from './three.module.js';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const controls = new OrbitControls( camera, renderer.domElement );
+const loader = new GLTFLoader();
 
 let col = document.getElementsByClassName('second-col')[0]
 
