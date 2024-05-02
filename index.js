@@ -53,7 +53,8 @@ scene.add( cube );
  
 })
 
-
+const light = new THREE.AmbientLight( 0x40340 ); 
+scene.add( light );
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
