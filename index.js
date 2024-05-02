@@ -28,21 +28,35 @@ camera.position.z = 50;
 let ambientLight = new THREE.AmbientLight()
 let mouseX =0;
 let mouseY=0;
-window.addEventListener('mousemove',(e)=>{
+window.addEventListener('click',(e)=>{
    e.preventDefault()
-   
-    if(e.movementX>0){
-    cube.rotateY(-0.01)
-   }
-   else 
-   {
-    cube.rotateY(0.0)
-   }
-   if(e.movementY>0){
-    cube.rotateX(0.01)
-   }else{
-    cube.rotateX(-0.01)
-   }
+   const geometry = new THREE.SphereGeometry( 5, 15, 60 ); 
+   const hue = Math.random();
+   const saturation = 0.5;
+   const lightness = 0.5;
+
+   const color = new THREE.Color().setHSL(hue, saturation, lightness);
+
+   let x =Math.round(Math.random()*50 -25)
+   let y =Math.round(Math.random()*50 -25)
+   let z =Math.round(Math.random()*50 -25)
+   let value = Math.random()
+    if(value>0.5){
+        const material = new THREE.MeshBasicMaterial( { color: color } ); 
+        const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
+        sphere.position.x = x
+        sphere.position.y = y
+        sphere.position.z = z
+        scene.add(sphere)
+    }else{
+        const material = new THREE.MeshBasicMaterial( { color: color } ); 
+        const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+const cube = new THREE.Mesh( geometry, material );
+cube.position.x = x
+cube.position.y = y
+cube.position.z = z
+scene.add( cube );
+    }
  
 })
 
