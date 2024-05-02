@@ -14,20 +14,13 @@ const loader = new GLTFLoader();
 renderer.setSize( window.innerWidth, window.innerHeight );
 col.appendChild( renderer.domElement );
 
-let grid = new THREE.GridHelper(40,40)
-scene.add(grid)
-const geometry = new THREE.BoxGeometry( 5, 5, 5 );
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
-grid.position.setY(15)
-cube.position.setY(15)
+
+
+
 camera.position.x = 0;
 camera.position.y = 20;
 camera.position.z = 50;
-let ambientLight = new THREE.AmbientLight()
-let mouseX =0;
-let mouseY=0;
+
 window.addEventListener('click',(e)=>{
    e.preventDefault()
    const geometry = new THREE.SphereGeometry( 5, 15, 60 ); 
