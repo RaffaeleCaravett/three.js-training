@@ -2,7 +2,6 @@ import * as THREE from './node_modules/three/build/three.module.js';
 import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
-
 //Getting div element from document
 let col = document.getElementsByClassName('second-col')[0]
 
@@ -11,7 +10,6 @@ let scene = new THREE.Scene()
 const renderer = new THREE.WebGLRenderer();
 let camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 const controls = new OrbitControls( camera, renderer.domElement );
-const loader = new GLTFLoader();
 renderer.setSize( window.innerWidth, window.innerHeight );
 col.appendChild( renderer.domElement );
 
@@ -74,10 +72,11 @@ const geometry1 = new THREE.BufferGeometry().setFromPoints( points1 );
 const line1 = new THREE.Line( geometry1, material1 );
 scene.add( line,line1 );
 
+
 //Setting camera position
 camera.position.x = 0;
 camera.position.y = 20;
-camera.position.z = 70;
+camera.position.z = 50;
 
 /*Adding random stuff at click event in random position */
 // window.addEventListener('click',(e)=>{
@@ -114,10 +113,33 @@ camera.position.z = 70;
 
 
 //Luce
-const light = new THREE.AmbientLight( 0x40340 ); 
+const light = new THREE.AmbientLight( 0x40340,1 ); 
 scene.add( light );
+
+//animate the scene
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 }
 animate()
+
+
+const grid = new THREE.GridHelper(20,20,0x8005ff,0x8005ff)
+grid.position.x = 4
+grid.position.y = -3
+scene.add(grid)
+
+
+
+const loader = new GLTFLoader();
+
+loader.load( './model/map/postwar_city_-_exterior_scene.glb', function ( gltf ) {
+	scene.add( gltf.scene );
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+scene.add( directionalLight );
