@@ -3,9 +3,10 @@ import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitC
 import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
 
-
+//Getting div element from document
 let col = document.getElementsByClassName('second-col')[0]
 
+//Creating and render the scene
 let scene = new THREE.Scene()
 const renderer = new THREE.WebGLRenderer();
 let camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -14,45 +15,57 @@ const loader = new GLTFLoader();
 renderer.setSize( window.innerWidth, window.innerHeight );
 col.appendChild( renderer.domElement );
 
+//Creating lines
+const material = new THREE.LineBasicMaterial( { color: 0x8225ff } );
+const points = [];
+points.push( new THREE.Vector3( - 10, 0, 0 ) );
+points.push( new THREE.Vector3( 0, 10, 0 ) );
+points.push( new THREE.Vector3( 10, 0, 0 ) );
 
+const geometry = new THREE.BufferGeometry().setFromPoints( points );
+const line = new THREE.Line( geometry, material );
+scene.add( line );
 
-
+//Setting camera position
 camera.position.x = 0;
 camera.position.y = 20;
-camera.position.z = 50;
+camera.position.z = 70;
 
-window.addEventListener('click',(e)=>{
-   e.preventDefault()
-   const geometry = new THREE.SphereGeometry( 5, 15, 60 ); 
-   const hue = Math.random();
-   const saturation = 0.5;
-   const lightness = 0.5;
+/*Adding random stuff at click event in random position */
+// window.addEventListener('click',(e)=>{
+//    e.preventDefault()
+//    const geometry = new THREE.SphereGeometry( 5, 15, 60 ); 
+//    const hue = Math.random();
+//    const saturation = 0.5;
+//    const lightness = 0.5;
 
-   const color = new THREE.Color().setHSL(hue, saturation, lightness);
+//    const color = new THREE.Color().setHSL(hue, saturation, lightness);
 
-   let x =Math.round(Math.random()*50 -25)
-   let y =Math.round(Math.random()*50 -25)
-   let z =Math.round(Math.random()*50 -25)
-   let value = Math.random()
-    if(value>0.5){
-        const material = new THREE.MeshBasicMaterial( { color: color } ); 
-        const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
-        sphere.position.x = x
-        sphere.position.y = y
-        sphere.position.z = z
-        scene.add(sphere)
-    }else{
-        const material = new THREE.MeshBasicMaterial( { color: color } ); 
-        const geometry = new THREE.BoxGeometry( 5, 5, 5 );
-const cube = new THREE.Mesh( geometry, material );
-cube.position.x = x
-cube.position.y = y
-cube.position.z = z
-scene.add( cube );
-    }
+//    let x =Math.round(Math.random()*50 -25)
+//    let y =Math.round(Math.random()*50 -25)
+//    let z =Math.round(Math.random()*50 -25)
+//    let value = Math.random()
+//     if(value>0.5){
+//         const material = new THREE.MeshBasicMaterial( { color: color } ); 
+//         const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
+//         sphere.position.x = x
+//         sphere.position.y = y
+//         sphere.position.z = z
+//         scene.add(sphere)
+//     }else{
+//         const material = new THREE.MeshBasicMaterial( { color: color } ); 
+//         const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+// const cube = new THREE.Mesh( geometry, material );
+// cube.position.x = x
+// cube.position.y = y
+// cube.position.z = z
+// scene.add( cube );
+//     }
  
-})
+// })
 
+
+//Luce
 const light = new THREE.AmbientLight( 0x40340 ); 
 scene.add( light );
 function animate() {
