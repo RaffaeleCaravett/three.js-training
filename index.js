@@ -135,11 +135,11 @@ const loader = new GLTFLoader();
 
 loader.load( './model/map/postwar_city_-_exterior_scene.glb', function ( gltf ) {
 	scene.add( gltf.scene );
-
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+scene.add( directionalLight );
+directionalLight.target(gltf.scene)
 }, undefined, function ( error ) {
 
 	console.error( error );
 
 } );
-const directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
-scene.add( directionalLight );
