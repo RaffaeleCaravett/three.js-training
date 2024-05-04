@@ -130,16 +130,44 @@ grid.position.y = -3
 scene.add(grid)
 
 
+const object = new THREE.Object3D();
+scene.add( object );
 
-const loader = new GLTFLoader();
+const object1 = new THREE.Object3D();
+const object2 = new THREE.Object3D();
+object1.add(object2)
+scene.add(object1)
+object.matrixAutoUpdate = false;
+object.updateMatrix();
+const MAX_POINTS = 500;
 
-loader.load( './model/map/postwar_city_-_exterior_scene.glb', function ( gltf ) {
-	scene.add( gltf.scene );
-const directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
-scene.add( directionalLight );
-directionalLight.target(gltf.scene)
-}, undefined, function ( error ) {
+// geometry
+const geometryLine = new THREE.BufferGeometry();
 
-	console.error( error );
+// attributes
+const positions = new Float32Array( MAX_POINTS * 3 ); // 3 vertices per point
+geometryLine.setAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
 
-} );
+// draw range
+const drawCount = 2; // draw the first 2 points, only
+geometryLine.setDrawRange( 0, drawCount );
+
+// material
+const materialLine = new THREE.LineBasicMaterial( { color: 0xff2000 } );
+
+// line
+const lineLine = new THREE.Line( geometryLine, materialLine );
+scene.add( lineLine );
+const positionAttribute = lineLine.geometry.getAttribute( 'position' );
+
+let x = 0, y = 0, z = 0;
+
+for ( let i = 0; i < positionAttribute.count; i ++ ) {
+
+	positionAttribute.setXYZ( i, x, y, z );
+
+    x += ( Math.random() - 0.5 ) * 30;
+    y += ( Math.random() - 0.5 ) * 30;
+    z += ( Math.random() - 0.5 ) * 30;
+
+}
