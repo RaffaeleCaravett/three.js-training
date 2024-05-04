@@ -79,6 +79,30 @@ cube.add(torus,torus1,torus2,torus3,torus4)
 scene.add(cube)
 
 //animate the scene
+
+
+//Animate render for VR
+// renderer.setAnimationLoop( function () {
+
+// 	renderer.render( scene, camera );
+
+// } );
+let particlesArray = []
+
+for (let i = 0 ;i<= 50000; i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+const randomPositionX = Math.round(Math.random()*2200-1100)
+const randomPositionY = Math.round(Math.random()*2200-1100)
+const randomPositionZ = Math.round(Math.random()*2200-1100)
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+capsule.position.z=randomPositionZ;
+particlesArray.push(capsule)
+scene.add( capsule );
+}
+
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
@@ -88,16 +112,15 @@ function animate() {
 	torus3.rotation.x+=0.005
 	torus4.rotation.x+=0.005
 	cube.rotation.y+=0.005
+	particlesArray.forEach((c)=>{
+		c.rotateX(0.02)
+		c.position.x+=0.1
+		c.position.y+=0.1
+		c.position.z+=0.1
+	})
+	
 }
 animate()
-
-//Animate render for VR
-// renderer.setAnimationLoop( function () {
-
-// 	renderer.render( scene, camera );
-
-// } );
-
 window.addEventListener('resize',()=>{
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
