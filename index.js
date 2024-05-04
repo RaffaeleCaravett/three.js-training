@@ -1,6 +1,13 @@
 import * as THREE from './node_modules/three/build/three.module.js';
 import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import { VRButton } from './node_modules/three/examples/jsm/webxr/VRButton.js';
+import { EffectComposer } from './node_modules/three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from './node_modules/three/examples/jsm/postprocessing/RenderPass.js';
+import { GlitchPass } from './node_modules/three/examples/jsm/postprocessing/GlitchPass.js';
+import { OutputPass } from './node_modules/three/examples/jsm/postprocessing/OutputPass.js';
+import { ShaderPass } from './node_modules/three/examples/jsm/postprocessing/ShaderPass.js';
+import { LuminosityShader } from './node_modules/three/examples/jsm/shaders/LuminosityShader.js';
 
 //Getting div element from document
 let col = document.getElementsByClassName('second-col')[0]
@@ -116,12 +123,7 @@ camera.position.z = 50;
 const light = new THREE.AmbientLight( 0x40340,1 ); 
 scene.add( light );
 
-//animate the scene
-function animate() {
-	requestAnimationFrame( animate );
-	renderer.render( scene, camera );
-}
-animate()
+
 
 
 const grid = new THREE.GridHelper(20,20,0x8005ff,0x8005ff)
@@ -139,35 +141,75 @@ object1.add(object2)
 scene.add(object1)
 object.matrixAutoUpdate = false;
 object.updateMatrix();
-const MAX_POINTS = 500;
 
-// geometry
-const geometryLine = new THREE.BufferGeometry();
+//Create multiple lines, 'drawCount' hold the number of points to track the line
+// const MAX_POINTS = 500;
 
-// attributes
-const positions = new Float32Array( MAX_POINTS * 3 ); // 3 vertices per point
-geometryLine.setAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+// // geometry
+// const geometryLine = new THREE.BufferGeometry();
 
-// draw range
-const drawCount = 2; // draw the first 2 points, only
-geometryLine.setDrawRange( 0, drawCount );
+// // attributes
+// const positions = new Float32Array( MAX_POINTS * 3 ); // 3 vertices per point
+// geometryLine.setAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
 
-// material
-const materialLine = new THREE.LineBasicMaterial( { color: 0xff2000 } );
+// // draw range
+// const drawCount = 200; // draw the first 2 points, only
+// geometryLine.setDrawRange( 0, drawCount );
 
-// line
-const lineLine = new THREE.Line( geometryLine, materialLine );
-scene.add( lineLine );
-const positionAttribute = lineLine.geometry.getAttribute( 'position' );
+// // material
+// const materialLine = new THREE.LineBasicMaterial( { color: 0xff2000 } );
 
-let x = 0, y = 0, z = 0;
+// // line
+// const lineLine = new THREE.Line( geometryLine, materialLine );
+// scene.add( lineLine );
+// const positionAttribute = lineLine.geometry.getAttribute( 'position' );
 
-for ( let i = 0; i < positionAttribute.count; i ++ ) {
+// let x = 0, y = 0, z = 0;
 
-	positionAttribute.setXYZ( i, x, y, z );
+// for ( let i = 0; i < positionAttribute.count; i ++ ) {
 
-    x += ( Math.random() - 0.5 ) * 30;
-    y += ( Math.random() - 0.5 ) * 30;
-    z += ( Math.random() - 0.5 ) * 30;
+// 	positionAttribute.setXYZ( i, x, y, z );
 
+//     x += ( Math.random() - 0.5 ) * 30;
+//     y += ( Math.random() - 0.5 ) * 30;
+//     z += ( Math.random() - 0.5 ) * 30;
+
+// }
+
+
+// ### Needed to make changes after the first render ###
+
+// positionAttribute.needsUpdate = true; // required after the first render
+
+document.body.appendChild( VRButton.createButton( renderer ) );
+renderer.xr.enabled = true;
+const composer = new EffectComposer( renderer );
+
+//animate the scene
+function animate() {
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	composer.render();
 }
+animate()
+
+//Animate render for VR
+// renderer.setAnimationLoop( function () {
+
+// 	renderer.render( scene, camera );
+
+// } );
+
+const renderPass = new RenderPass( scene, camera );
+composer.addPass( renderPass );
+
+const glitchPass = new GlitchPass();
+composer.addPass( glitchPass );
+
+const outputPass = new OutputPass();
+composer.addPass( outputPass );
+
+// later in your init routine
+
+const luminosityPass = new ShaderPass( LuminosityShader );
+composer.addPass( luminosityPass );
