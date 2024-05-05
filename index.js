@@ -84,37 +84,76 @@ scene.add(cube)
 // 	renderer.render( scene, camera );
 
 // } );
-let particlesArray = []
+// let particlesArray = []
 
-for (let i = 0 ;i<= 50000; i++){
-	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
-const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} ); 
-const capsule = new THREE.Mesh( geometry, material ); 
-const randomPositionX = Math.round(Math.random()*2200-1100)
-const randomPositionY = Math.round(Math.random()*2200-1100)
-const randomPositionZ = Math.round(Math.random()*2200-1100)
-capsule.position.x=randomPositionX;
-capsule.position.y=randomPositionY;
-capsule.position.z=randomPositionZ;
-particlesArray.push(capsule)
-scene.add( capsule );
-}
-
-for(let i = 0 ;i<=500;i++){
+// for (let i = 0 ;i<= 50000; i++){
+// 	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+// const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} ); 
+// const capsule = new THREE.Mesh( geometry, material ); 
+// const randomPositionX = Math.round(Math.random()*2200-1100)
+// const randomPositionY = Math.round(Math.random()*2200-1100)
+// const randomPositionZ = Math.round(Math.random()*2200-1100)
+// capsule.position.x=randomPositionX;
+// capsule.position.y=randomPositionY;
+// capsule.position.z=randomPositionZ;
+// particlesArray.push(capsule)
+// scene.add( capsule );
+// }
+let name =[]
+let randomPositionX = 0
+let randomPositionY = 0
+for(let i =  0;i<=29;i++){
 	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
 const material = new THREE.MeshBasicMaterial( {color: 0x023ff00} ); 
 const capsule = new THREE.Mesh( geometry, material ); 
-const randomPositionX = Math.round(Math.random()*2200-1100)
-const randomPositionY = Math.round(Math.random()*2200-1100)
-const randomPositionZ = Math.round(Math.random()*2200-1100)
-capsule.position.x=randomPositionX;
-capsule.position.y=randomPositionY;
-capsule.position.z=randomPositionZ;
-particlesArray.push(capsule)
-scene.add( capsule );
+if(i%3==0){
+	randomPositionX=0
+	randomPositionY+=3
 }
 
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
 
+if(randomPositionX<9){
+randomPositionX+=3
+}
+name.push(capsule)
+scene.add( capsule );
+}
+randomPositionX=0
+randomPositionY=33
+for(let i = 0;i<2;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0x023ff00} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	console.log(capsule)
+	randomPositionX+=3
+}
+randomPositionX=0
+randomPositionY=36
+for(let i = 0;i<1;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0x023ff00} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	console.log(capsule)
+	randomPositionX+=3
+}
 
 
 
@@ -127,12 +166,12 @@ function animate() {
 	torus3.rotation.x+=0.005
 	torus4.rotation.x+=0.005
 	cube.rotation.y+=0.005
-	particlesArray.forEach((c)=>{
-		c.rotateX(0.02)
-		c.position.x+=0.1
-		c.position.y+=0.1
-		c.position.z+=0.1
-	})
+	// particlesArray.forEach((c)=>{
+	// 	c.rotateX(0.02)
+	// 	c.position.x+=0.1
+	// 	c.position.y+=0.1
+	// 	c.position.z+=0.1
+	// })
 	
 }
 animate()
