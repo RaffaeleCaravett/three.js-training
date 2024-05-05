@@ -31,7 +31,6 @@ const material = new THREE.MeshBasicMaterial(
 		color: 0xffff00,
 wireframe: true
 	} ); 
-console.log(material)
 const torus = new THREE.Mesh( geometry, material ); 
 const geometry1 = new THREE.TorusGeometry( 10, 3, 16, 100 ); 
 const material1 = new THREE.MeshBasicMaterial( 
@@ -57,7 +56,6 @@ const material3 = new THREE.MeshBasicMaterial(
 		color: 0xffff00,
 wireframe: true
 	} ); 
-console.log(material)
 const torus3 = new THREE.Mesh( geometry3, material3 );
 torus.position.x=-27;
 const geometry4 = new THREE.TorusGeometry( 10, 3, 16, 100 ); 
@@ -66,7 +64,6 @@ const material4 = new THREE.MeshBasicMaterial(
 		color: 0xffff00,
 wireframe: true
 	} ); 
-console.log(material)
 const torus4 = new THREE.Mesh( geometry4, material4 );
 torus4.position.x=27;
 
@@ -102,6 +99,24 @@ capsule.position.z=randomPositionZ;
 particlesArray.push(capsule)
 scene.add( capsule );
 }
+
+for(let i = 0 ;i<=500;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0x023ff00} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+const randomPositionX = Math.round(Math.random()*2200-1100)
+const randomPositionY = Math.round(Math.random()*2200-1100)
+const randomPositionZ = Math.round(Math.random()*2200-1100)
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+capsule.position.z=randomPositionZ;
+particlesArray.push(capsule)
+scene.add( capsule );
+}
+
+
+
+
 
 function animate() {
 	requestAnimationFrame( animate );
