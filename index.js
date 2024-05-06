@@ -100,6 +100,8 @@ camera.position.z = 200;
 // scene.add( capsule );
 // }
 let name =[]
+
+// ********************************** LETTERA R ***********************************************
 let randomPositionX = 0
 let randomPositionY = 0
 for(let i =  0;i<=29;i++){
@@ -347,8 +349,12 @@ capsule.position.y=randomPositionY;
 	randomPositionX+=3
 }
 
+// ********************************** LETTERA A ***********************************************
+
 randomPositionX=33
 randomPositionY=3
+
+
 for(let i = 1;i<=27;i++){
 	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
 const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
@@ -454,7 +460,7 @@ capsule.position.y=randomPositionY;
 randomPositionY=18
 for(let i = 0;i<=9;i++){
 	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
-const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18ff120} ); 
 const capsule = new THREE.Mesh( geometry, material ); 
 
 
@@ -471,11 +477,16 @@ capsule.position.y=randomPositionY;
 	}
 }
 
+// ********************************** LETTERA F ***********************************************
+
 randomPositionX=72
 randomPositionY=3
+
+
+
 for(let i = 1;i<=36;i++){
 	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
-const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xff38f120} ); 
 const capsule = new THREE.Mesh( geometry, material ); 
 
 
@@ -496,7 +507,7 @@ randomPositionX=81
 randomPositionY=36
 for(let i = 1;i<=6;i++){
 	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
-const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf1ff120} ); 
 const capsule = new THREE.Mesh( geometry, material ); 
 
 
@@ -537,8 +548,11 @@ capsule.position.y=randomPositionY;
 	
 }
 
+// ********************************** LETTERA F ***********************************************
+
 randomPositionX=93
 randomPositionY=3
+
 for(let i = 1;i<=36;i++){
 	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
 const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
@@ -562,7 +576,7 @@ randomPositionX=102
 randomPositionY=36
 for(let i = 1;i<=6;i++){
 	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
-const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf1812f0} ); 
 const capsule = new THREE.Mesh( geometry, material ); 
 
 
@@ -584,7 +598,7 @@ randomPositionX=102
 randomPositionY=24
 for(let i = 1;i<=6;i++){
 	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
-const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf5f8120} ); 
 const capsule = new THREE.Mesh( geometry, material ); 
 
 
@@ -598,6 +612,362 @@ capsule.position.y=randomPositionY;
 
 		if(i==3){
 			randomPositionX=102
+			randomPositionY-=3
+		}
+	
+}
+// ********************************** LETTERA A ***********************************************
+
+randomPositionX=114
+randomPositionY=3
+
+
+for(let i = 1;i<=27;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+	if(i%3==0){
+		randomPositionX=114
+		randomPositionY+=3
+	}
+}
+randomPositionX=117
+randomPositionY=30
+for(let i = 0;i<=2;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+}
+randomPositionX=120
+randomPositionY=33
+for(let i = 0;i<=5;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+}
+randomPositionX=120
+randomPositionY=36
+for(let i = 0;i<=5;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+}
+randomPositionX=136
+randomPositionY=30
+for(let i = 0;i<=2;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+}
+randomPositionX=139
+randomPositionY=27
+for(let i = 1;i<=27;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+	if(i%3==0){
+		randomPositionX=139
+		randomPositionY-=3
+	}}
+	randomPositionX=124
+randomPositionY=18
+for(let i = 0;i<=9;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf1f8f67f12f4f} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+	if(i==4){
+		randomPositionX-=15
+		randomPositionY=15
+	}
+}
+
+// ********************************** LETTERA E ***********************************************
+
+randomPositionX=151
+randomPositionY=3
+
+for(let i = 1;i<=36;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+    if(i%3==0){
+		randomPositionX=151
+		randomPositionY+=3
+	}
+}
+randomPositionX=160
+randomPositionY=36
+for(let i = 1;i<=6;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf1812f0} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+		if(i==3){
+			randomPositionX=160
+			randomPositionY-=3
+		}
+	
+}
+randomPositionX=160
+randomPositionY=24
+for(let i = 1;i<=6;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf5f8120f} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+		if(i==3){
+			randomPositionX=160
+			randomPositionY-=3
+		}
+	
+}
+randomPositionX=160
+randomPositionY=6
+for(let i = 1;i<=6;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf9f812f0} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+		if(i==3){
+			randomPositionX=160
+			randomPositionY-=3
+		}
+	
+}
+
+// ********************************** LETTERA L ***********************************************
+
+randomPositionX=172
+randomPositionY=3
+
+for(let i = 1;i<=36;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+    if(i%3==0){
+		randomPositionX=172
+		randomPositionY+=3
+	}
+}
+
+randomPositionX=181
+randomPositionY=6
+for(let i = 1;i<=6;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf9f812f0} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+		if(i==3){
+			randomPositionX=181
+			randomPositionY-=3
+		}
+	
+}
+// ********************************** LETTERA E ***********************************************
+
+randomPositionX=192
+randomPositionY=3
+
+for(let i = 1;i<=36;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+    if(i%3==0){
+		randomPositionX=192
+		randomPositionY+=3
+	}
+}
+randomPositionX=201
+randomPositionY=36
+for(let i = 1;i<=6;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0x9f19} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+		if(i==3){
+			randomPositionX=201
+			randomPositionY-=3
+		}
+	
+}
+randomPositionX=201
+randomPositionY=24
+for(let i = 1;i<=6;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf5f81f} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+		if(i==3){
+			randomPositionX=201
+			randomPositionY-=3
+		}
+	
+}
+randomPositionX=201
+randomPositionY=6
+for(let i = 1;i<=6;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf9f2f0} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+		if(i==3){
+			randomPositionX=201
 			randomPositionY-=3
 		}
 	
