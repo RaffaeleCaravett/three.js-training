@@ -470,6 +470,28 @@ capsule.position.y=randomPositionY;
 		randomPositionY=15
 	}
 }
+
+randomPositionX=72
+randomPositionY=3
+for(let i = 1;i<=36;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+    if(i%3==0){
+		randomPositionX=72
+		randomPositionY+=3
+	}
+}
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
