@@ -16,9 +16,9 @@ col.appendChild( renderer.domElement );
 
 
 //Setting camera position
-camera.position.x = 0;
+camera.position.x = 100;
 camera.position.y = 20;
-camera.position.z = 50;
+camera.position.z = 200;
 
 
 
@@ -491,6 +491,50 @@ capsule.position.y=randomPositionY;
 		randomPositionX=72
 		randomPositionY+=3
 	}
+}
+randomPositionX=81
+randomPositionY=36
+for(let i = 1;i<=6;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+		if(i==3){
+			randomPositionX=81
+			randomPositionY-=3
+		}
+	
+}
+randomPositionX=81
+randomPositionY=24
+for(let i = 1;i<=6;i++){
+	const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0xf18120} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+
+
+capsule.position.x=randomPositionX;
+capsule.position.y=randomPositionY;
+	
+	
+	name.push(capsule)
+	scene.add(capsule)
+	randomPositionX+=3
+
+		if(i==3){
+			randomPositionX=81
+			randomPositionY-=3
+		}
+	
 }
 function animate() {
 	requestAnimationFrame( animate );
