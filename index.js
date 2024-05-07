@@ -18,7 +18,7 @@ col.appendChild( renderer.domElement );
 //Setting camera position
 camera.position.x = 100;
 camera.position.y = 20;
-camera.position.z = 200;
+camera.position.z = 230;
 
 
 
@@ -2714,9 +2714,37 @@ capsule.position.y=randomPositionY;
 		}
 	
 }
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+
+function onPointerMove( event ) {
+
+	// calculate pointer position in normalized device coordinates
+	// (-1 to +1) for both components
+
+	pointer.x =  event.clientX;
+	pointer.y =  event.clientY
+	
+	const intersects = raycaster.intersectObjects( scene.children );
+console.log(intersects)
+	for ( let i = 0; i < intersects.length; i ++ ) {
+
+		intersects[ i ].object.material.color.set( 0xff0000 );
+
+	}
+}
+
+window.addEventListener( 'pointermove', onPointerMove );
+
+
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
+
+	raycaster.setFromCamera( pointer, camera );
+
+	
+
 	// torus.rotation.x+=0.005
 	// torus1.rotation.x+=0.005
 	// torus2.rotation.x+=0.005
