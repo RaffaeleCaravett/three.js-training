@@ -136,7 +136,6 @@ capsule.position.y=randomPositionY;
 	
 	name.push(capsule)
 	scene.add(capsule)
-	console.log(capsule)
 	randomPositionX+=3
 }
 randomPositionX=0
@@ -153,7 +152,6 @@ capsule.position.y=randomPositionY;
 	
 	name.push(capsule)
 	scene.add(capsule)
-	console.log(capsule)
 	randomPositionX+=3
 }
 randomPositionX=3
@@ -1007,7 +1005,6 @@ capsule.position.y=randomPositionY;
 	
 	name.push(capsule)
 	scene.add(capsule)
-	console.log(capsule)
 	randomPositionX+=3
 }
 randomPositionX=0
@@ -1024,7 +1021,6 @@ capsule.position.y=randomPositionY;
 	
 	name.push(capsule)
 	scene.add(capsule)
-	console.log(capsule)
 	randomPositionX+=3
 }
 randomPositionX=3
@@ -1878,7 +1874,6 @@ capsule.position.y=randomPositionY;
 	
 	name.push(capsule)
 	scene.add(capsule)
-	console.log(capsule)
 	randomPositionX+=3
 }
 randomPositionX=0
@@ -1895,7 +1890,6 @@ capsule.position.y=randomPositionY;
 	
 	name.push(capsule)
 	scene.add(capsule)
-	console.log(capsule)
 	randomPositionX+=3
 }
 randomPositionX=3
@@ -2714,34 +2708,12 @@ capsule.position.y=randomPositionY;
 		}
 	
 }
-const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2();
-
-function onPointerMove( event ) {
-
-	// calculate pointer position in normalized device coordinates
-	// (-1 to +1) for both components
-
-	pointer.x =  event.clientX;
-	pointer.y =  event.clientY
-	
-	const intersects = raycaster.intersectObjects( scene.children );
-console.log(intersects)
-	for ( let i = 0; i < intersects.length; i ++ ) {
-
-		intersects[ i ].object.material.color.set( 0xff0000 );
-
-	}
-}
-
-window.addEventListener( 'pointermove', onPointerMove );
 
 
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 
-	raycaster.setFromCamera( pointer, camera );
 
 	
 
