@@ -121,16 +121,12 @@ sphere.castShadow = true; //default is false
 sphere.receiveShadow = false; //default
 scene.add( sphere );
 
-//Create a plane that receives shadows (but does not cast them)
-const planeGeometry = new THREE.PlaneGeometry( 20, 20, 32, 32 );
-const planeMaterial = new THREE.MeshStandardMaterial( { color: 0x00ff00 } )
-const plane = new THREE.Mesh( planeGeometry, planeMaterial );
-plane.receiveShadow = true;
-scene.add( plane );
 
-//Create a helper for the shadow camera (optional)
-const helper = new THREE.CameraHelper( light.shadow.camera );
-scene.add( helper );
+
+
+
+const gridHelper = new THREE.GridHelper(20,20,0xfff034,0x76f3f)
+scene.add(gridHelper)
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
