@@ -102,9 +102,8 @@ camera.position.z = 50;
 
 
 
-const light = new THREE.DirectionalLight( 0xffffff, 1 );
-light.position.set( 0, 1, 0 ); //default; light shining from top
-light.castShadow = true; // default false
+const light = new THREE.DirectionalLight( 0xf20419, 1 );
+light.position.set( 3, -1, 0 ); 
 scene.add( light );
 
 //Set up shadow properties for the light
