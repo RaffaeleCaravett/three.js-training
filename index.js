@@ -102,28 +102,35 @@ camera.position.z = 50;
 
 
 
-const ambientLight = new THREE.AmbientLight(0xf4f5528f7,0.5)
-const radius = 10;
-const sectors = 16;
-const rings = 8;
-const divisions = 64;
+const light = new THREE.DirectionalLight( 0xffffff, 1 );
+light.position.set( 0, 1, 0 ); //default; light shining from top
+light.castShadow = true; // default false
+scene.add( light );
 
-const helper = new THREE.PolarGridHelper( radius, sectors, rings, divisions );
+//Set up shadow properties for the light
+light.shadow.mapSize.width = 512; // default
+light.shadow.mapSize.height = 512; // default
+light.shadow.camera.near = 0.5; // default
+light.shadow.camera.far = 500; // default
+
+//Create a sphere that cast shadows (but does not receive them)
+const sphereGeometry = new THREE.SphereGeometry( 5, 32, 32 );
+const sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
+const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+sphere.castShadow = true; //default is false
+sphere.receiveShadow = false; //default
+scene.add( sphere );
+
+//Create a plane that receives shadows (but does not cast them)
+const planeGeometry = new THREE.PlaneGeometry( 20, 20, 32, 32 );
+const planeMaterial = new THREE.MeshStandardMaterial( { color: 0x00ff00 } )
+const plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.receiveShadow = true;
+scene.add( plane );
+
+//Create a helper for the shadow camera (optional)
+const helper = new THREE.CameraHelper( light.shadow.camera );
 scene.add( helper );
-const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
-const helper1 = new THREE.HemisphereLightHelper( light, 5 );
-scene.add( helper1 );
-
-const light2 = new THREE.DirectionalLight( 0xFFFFFF );
-scene.add( light2 );
-
-const helper2 = new THREE.DirectionalLightHelper( light2, 5 );
-scene.add( helper2 );
-
-const cameraHelper = new THREE.CameraHelper( camera );
-scene.add( cameraHelper );
-
-camera.lookAt(0,0,0)
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
