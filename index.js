@@ -18,7 +18,7 @@ col.appendChild( renderer.domElement );
 //Setting camera position
 camera.position.x = 0;
 camera.position.y = 0;
-camera.position.z = 50;
+camera.position.z = 55;
 
 
 
@@ -106,7 +106,8 @@ camera.position.z = 50;
 const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 ); 
 const material = new THREE.MeshBasicMaterial( { color: 0xff1f00,wireframe:true } ); 
 const torusKnot = new THREE.Mesh( geometry, material ); scene.add( torusKnot );
-torusKnot.position.z=8
+torusKnot.position.z=0
+torusKnot.position.y=8
 torusKnot.rotateX(-240)
 const planeGeometry = new THREE.PlaneGeometry( 50, 50 );
 const planeMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
@@ -121,7 +122,7 @@ pointLight.position.z = 4
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
-
+torusKnot.rotateZ(0.01)
 
 	
 
