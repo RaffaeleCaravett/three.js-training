@@ -17,7 +17,7 @@ col.appendChild( renderer.domElement );
 
 //Setting camera position
 camera.position.x = 0;
-camera.position.y = 10;
+camera.position.y = 0;
 camera.position.z = 50;
 
 
@@ -102,30 +102,22 @@ camera.position.z = 50;
 
 
 
-const light = new THREE.DirectionalLight( 0xf20419, 1 );
-light.position.set( 3, -1, 0 ); 
-scene.add( light );
 
-//Set up shadow properties for the light
-light.shadow.mapSize.width = 512; // default
-light.shadow.mapSize.height = 512; // default
-light.shadow.camera.near = 0.5; // default
-light.shadow.camera.far = 500; // default
+const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 ); 
+const material = new THREE.MeshBasicMaterial( { color: 0xff1f00,wireframe:true } ); 
+const torusKnot = new THREE.Mesh( geometry, material ); scene.add( torusKnot );
+torusKnot.position.z=8
+torusKnot.rotateX(-240)
+const planeGeometry = new THREE.PlaneGeometry( 50, 50 );
+const planeMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+const plane = new THREE.Mesh( planeGeometry, planeMaterial );
+scene.add( plane );
+plane.rotateX(-240)
 
-//Create a sphere that cast shadows (but does not receive them)
-const sphereGeometry = new THREE.SphereGeometry( 5, 32, 32 );
-const sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
-const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-sphere.castShadow = true; //default is false
-sphere.receiveShadow = false; //default
-scene.add( sphere );
-
-
-
-
-
-const gridHelper = new THREE.GridHelper(20,20,0xfff034,0x76f3f)
-scene.add(gridHelper)
+const pointLight= new THREE.PointLight(0xffffff,0.1)
+pointLight.position.x = 2
+pointLight.position.y = 3
+pointLight.position.z = 4
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
