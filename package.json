@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "@types/dat.gui": "^0.7.13",
     "@types/three": "^0.164.0",
+    "dat.gui": "^0.7.9",
+    "npm-gui": "^4.0.4",
     "three": "^0.164.1"
   }
 }
