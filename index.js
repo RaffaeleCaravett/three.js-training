@@ -113,7 +113,7 @@ torusKnot.position.z=0
 torusKnot.position.y=10
 torusKnot.rotateX(-240)
 const planeGeometry = new THREE.PlaneGeometry( 50, 50 );
-const planeMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide, map:texture} );
+const planeMaterial = new THREE.MeshPhongMaterial( {color: 0xffff10, side: THREE.DoubleSide, map:texture,displacementMap:height} );
 const plane = new THREE.Mesh( planeGeometry, planeMaterial );
 scene.add( plane );
 plane.rotateX(-240)
@@ -123,16 +123,20 @@ pointLight.position.x = 2
 pointLight.position.y = 30
 pointLight.position.z = 4
 
+const ambientLight = new THREE.AmbientLight(0xffffff,1)
+
+scene.add(ambientLight)
+
 const gui = new dat.GUI()
 
 gui.add(plane.rotation,'x')
-gui.add(pointLight.position, 'x') 
-gui.add(pointLight.position, 'y') 
-gui.add(pointLight.position, 'z') 
+gui.add(ambientLight.position, 'x') 
+gui.add(ambientLight.position, 'y') 
+gui.add(ambientLight.position, 'z') 
 
 const clr = {color:'#00ff00'}
 gui.addColor(clr,'color').onChange(()=>{
-	planeMaterial.color.set(clr.color)
+	ambientLight.color.set(clr.color)
 })
 
 
