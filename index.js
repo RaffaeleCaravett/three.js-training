@@ -1,6 +1,7 @@
 import * as THREE from './node_modules/three/build/three.module.js';
 import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
-import * as dat from 'dat.gui';
+import * as dat from './node_modules/dat.gui/build/dat.gui.module.js';
+
 //Getting div element from document
 let col = document.getElementsByClassName('second-col')[0]
 
@@ -118,6 +119,16 @@ const pointLight= new THREE.PointLight(0xffffff,0.1)
 pointLight.position.x = 2
 pointLight.position.y = 3
 pointLight.position.z = 4
+
+const gui = new dat.GUI()
+
+gui.add(plane.rotation,'x')
+gui.add(pointLight.position, 'x') 
+gui.add(pointLight.position, 'y') 
+gui.add(pointLight.position, 'z') 
+
+
+
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
