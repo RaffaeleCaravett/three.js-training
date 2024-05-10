@@ -100,7 +100,10 @@ camera.position.z = 55;
 // scene.add( capsule );
 // }
 
-
+const loader = new THREE.TextureLoader()
+const height = loader.load('height.png')
+const texture = loader.load('./model/texture/texture.jpg')
+const alpha = loader.load('/alpha.png')
 
 
 const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 ); 
@@ -110,14 +113,14 @@ torusKnot.position.z=0
 torusKnot.position.y=10
 torusKnot.rotateX(-240)
 const planeGeometry = new THREE.PlaneGeometry( 50, 50 );
-const planeMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+const planeMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide, map:texture} );
 const plane = new THREE.Mesh( planeGeometry, planeMaterial );
 scene.add( plane );
 plane.rotateX(-240)
 
 const pointLight= new THREE.PointLight(0xffffff,2)
 pointLight.position.x = 2
-pointLight.position.y = 3
+pointLight.position.y = 30
 pointLight.position.z = 4
 
 const gui = new dat.GUI()
@@ -131,6 +134,9 @@ const clr = {color:'#00ff00'}
 gui.addColor(clr,'color').onChange(()=>{
 	planeMaterial.color.set(clr.color)
 })
+
+
+
 
 function animate() {
 	requestAnimationFrame( animate );
