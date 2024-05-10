@@ -107,7 +107,7 @@ const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
 const material = new THREE.MeshBasicMaterial( { color: 0xff1f00,wireframe:true } ); 
 const torusKnot = new THREE.Mesh( geometry, material ); scene.add( torusKnot );
 torusKnot.position.z=0
-torusKnot.position.y=8
+torusKnot.position.y=10
 torusKnot.rotateX(-240)
 const planeGeometry = new THREE.PlaneGeometry( 50, 50 );
 const planeMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
@@ -115,7 +115,7 @@ const plane = new THREE.Mesh( planeGeometry, planeMaterial );
 scene.add( plane );
 plane.rotateX(-240)
 
-const pointLight= new THREE.PointLight(0xffffff,0.1)
+const pointLight= new THREE.PointLight(0xffffff,2)
 pointLight.position.x = 2
 pointLight.position.y = 3
 pointLight.position.z = 4
@@ -127,7 +127,10 @@ gui.add(pointLight.position, 'x')
 gui.add(pointLight.position, 'y') 
 gui.add(pointLight.position, 'z') 
 
-
+const clr = {color:'#00ff00'}
+gui.addColor(clr,'color').onChange(()=>{
+	planeMaterial.color.set(clr.color)
+})
 
 function animate() {
 	requestAnimationFrame( animate );
