@@ -17,8 +17,8 @@ col.appendChild( renderer.domElement );
 
 //Setting camera position
 camera.position.x = 0;
-camera.position.y = 0;
-camera.position.z = 55;
+camera.position.y = 15;
+camera.position.z = 75;
 
 
 
@@ -103,7 +103,7 @@ camera.position.z = 55;
 const loader = new THREE.TextureLoader()
 const height = loader.load('./model/texture/displacement .jpeg')
 const texture = loader.load('./model/texture/texture.jpg')
-const alpha = loader.load('/alpha.png')
+// const alpha = loader.load('/alpha.png')
 
 
 const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 ); 
@@ -143,7 +143,15 @@ gui.addColor(clr,'color').onChange(()=>{
 	ambientLight.color.set(clr.color)
 })
 
+const handleWheelEvent = (e) => {
+if(e.wheelDelta<=0){
+plane.material.displacementScale-=5
+}else{
+	plane.material.displacementScale+=5
 
+}}
+
+document.addEventListener("wheel", handleWheelEvent);
 
 
 function animate() {
