@@ -101,27 +101,31 @@ camera.position.z = 55;
 // }
 
 const loader = new THREE.TextureLoader()
-const height = loader.load('height.png')
+const height = loader.load('./model/texture/displacement .jpeg')
 const texture = loader.load('./model/texture/texture.jpg')
 const alpha = loader.load('/alpha.png')
 
 
 const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 ); 
-const material = new THREE.MeshBasicMaterial( { color: 0xff1f00,wireframe:true } ); 
+const material = new THREE.MeshBasicMaterial( { color: '#ffd600',wireframe:true } ); 
 const torusKnot = new THREE.Mesh( geometry, material ); scene.add( torusKnot );
 torusKnot.position.z=0
-torusKnot.position.y=10
+torusKnot.position.y=30
 torusKnot.rotateX(-240)
-const planeGeometry = new THREE.PlaneGeometry( 50, 50 );
-const planeMaterial = new THREE.MeshPhongMaterial( {color: 0xffff10, side: THREE.DoubleSide, map:texture,displacementMap:height} );
+
+ 
+
+const planeGeometry = new THREE.PlaneGeometry( 50, 50 ,6.4,6.4);
+const planeMaterial = new THREE.MeshStandardMaterial( {
+color: 'red',
+map:texture,
+displacementMap:height,
+displacementScale:30.0
+} );
 const plane = new THREE.Mesh( planeGeometry, planeMaterial );
 scene.add( plane );
 plane.rotateX(-240)
 
-const pointLight= new THREE.PointLight(0xffffff,2)
-pointLight.position.x = 2
-pointLight.position.y = 30
-pointLight.position.z = 4
 
 const ambientLight = new THREE.AmbientLight(0xffffff,1)
 
