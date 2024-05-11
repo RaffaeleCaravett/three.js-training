@@ -144,6 +144,11 @@ scene.add(ambientLight)
 // 	ambientLight.color.set(clr.color)
 // })
 
+
+const pointLight = new THREE.PointLight(0xff342,1,10,10)
+pointLight.lookAt(plane)
+scene.add(pointLight)
+
 const handleWheelEvent = (e) => {
 if(e.wheelDelta<=0){
 plane.material.displacementScale-=5
@@ -151,6 +156,8 @@ plane.material.displacementScale-=5
 	plane.material.displacementScale+=5
 
 }}
+
+
 
 document.addEventListener("wheel", handleWheelEvent);
 
