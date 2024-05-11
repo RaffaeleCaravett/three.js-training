@@ -8,9 +8,15 @@ let col = document.getElementsByClassName('second-col')[0]
 //Creating and render the scene
 let scene = new THREE.Scene()
 const renderer = new THREE.WebGLRenderer();
-let camera = new THREE.PerspectiveCamera( 75, (window.innerWidth/2) / window.innerHeight, 0.1, 1000 );
+let camera = new THREE.PerspectiveCamera();
 const controls = new OrbitControls( camera, renderer.domElement );
+if(window.innerWidth>768){
+camera = new THREE.PerspectiveCamera( 75, (window.innerWidth/2) / window.innerHeight, 0.1, 1000 );
 renderer.setSize( (window.innerWidth/2), window.innerHeight );
+}else{
+	camera = new THREE.PerspectiveCamera( 75, (window.innerWidth) / window.innerHeight, 0.1, 1000 );
+renderer.setSize( (window.innerWidth), window.innerHeight );
+}
 renderer.setClearColor(0xffffff)
 col.appendChild( renderer.domElement );
 
@@ -114,14 +120,15 @@ torusKnot.position.z=0
 torusKnot.position.y=30
 torusKnot.rotateX(-240)
 
- 
+ const clock = new THREE.Clock()
 
 const planeGeometry = new THREE.PlaneGeometry( 50, 50 ,6.4,6.4);
 const planeMaterial = new THREE.MeshStandardMaterial( {
 color: 'red',
 map:texture,
 displacementMap:height,
-displacementScale:30.0
+displacementScale:30.0,
+transparent:true
 } );
 const plane = new THREE.Mesh( planeGeometry, planeMaterial );
 scene.add( plane );
@@ -145,10 +152,6 @@ scene.add(ambientLight)
 // })
 
 
-const pointLight = new THREE.PointLight(0xff342,1,10,10)
-pointLight.lookAt(plane)
-scene.add(pointLight)
-
 const handleWheelEvent = (e) => {
 if(e.wheelDelta<=0){
 plane.material.displacementScale-=5
@@ -166,8 +169,8 @@ function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 torusKnot.rotateZ(0.01)
-
-	
+const elapsedTime = clock.getElapsedTime()
+plane.rotation.z-= .002 
 
 	// torus.rotation.x+=0.005
 	// torus1.rotation.x+=0.005
@@ -204,6 +207,9 @@ torusKnot.rotateZ(0.01)
 	
 animate()
 window.addEventListener('resize',()=>{
-	renderer.setSize( window.innerWidth, window.innerHeight );
-
+	if(window.innerWidth>768){
+	renderer.setSize( (window.innerWidth/2.1), window.innerHeight );
+	}else{
+		renderer.setSize((window.innerWidth/1.1), window.innerHeight );
+	}
 })
