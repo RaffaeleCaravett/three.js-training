@@ -8,9 +8,10 @@ let col = document.getElementsByClassName('second-col')[0]
 //Creating and render the scene
 let scene = new THREE.Scene()
 const renderer = new THREE.WebGLRenderer();
-let camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+let camera = new THREE.PerspectiveCamera( 75, (window.innerWidth/2) / window.innerHeight, 0.1, 1000 );
 const controls = new OrbitControls( camera, renderer.domElement );
-renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setSize( (window.innerWidth/2), window.innerHeight );
+renderer.setClearColor(0xffffff)
 col.appendChild( renderer.domElement );
 
 
@@ -131,17 +132,17 @@ const ambientLight = new THREE.AmbientLight(0xffffff,1)
 
 scene.add(ambientLight)
 
-const gui = new dat.GUI()
+// const gui = new dat.GUI()
 
-gui.add(plane.rotation,'x')
-gui.add(ambientLight.position, 'x') 
-gui.add(ambientLight.position, 'y') 
-gui.add(ambientLight.position, 'z') 
+// gui.add(plane.rotation,'x')
+// gui.add(ambientLight.position, 'x') 
+// gui.add(ambientLight.position, 'y') 
+// gui.add(ambientLight.position, 'z') 
 
-const clr = {color:'#00ff00'}
-gui.addColor(clr,'color').onChange(()=>{
-	ambientLight.color.set(clr.color)
-})
+// const clr = {color:'#00ff00'}
+// gui.addColor(clr,'color').onChange(()=>{
+// 	ambientLight.color.set(clr.color)
+// })
 
 const handleWheelEvent = (e) => {
 if(e.wheelDelta<=0){
