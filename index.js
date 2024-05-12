@@ -152,6 +152,26 @@ scene.add(ambientLight)
 // })
 
 
+const absoluteDiv = document.getElementsByClassName('position-absolute')[0]
+
+let scene1 = new THREE.Scene()
+const renderer1 = new THREE.WebGLRenderer();
+let camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+renderer1.setSize( (window.innerWidth), window.innerHeight );
+renderer1.setClearColor(0x111111)
+absoluteDiv.appendChild( renderer1.domElement );
+const sphereGeometry = new THREE.SphereGeometry( 15, 32, 16 ); 
+const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
+const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+scene1.add( sphere )
+//Setting camera position
+camera1.position.x = 0;
+camera1.position.y = 15;
+camera1.position.z = 75;
+
+
+
+
 const handleWheelEvent = (e) => {
 if(e.wheelDelta<=0){
 plane.material.displacementScale-=5
@@ -161,13 +181,13 @@ plane.material.displacementScale-=5
 }}
 
 
-
 document.addEventListener("wheel", handleWheelEvent);
 
 
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
+	renderer1.render( scene1, camera1 );
 torusKnot.rotateZ(0.01)
 const elapsedTime = clock.getElapsedTime()
 plane.rotation.z-= .002 
