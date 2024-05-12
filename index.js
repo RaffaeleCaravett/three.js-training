@@ -155,15 +155,25 @@ scene.add(ambientLight)
 const absoluteDiv = document.getElementsByClassName('position-absolute')[0]
 
 let scene1 = new THREE.Scene()
-const renderer1 = new THREE.WebGLRenderer();
+const renderer1 = new THREE.WebGLRenderer({alpha:true});
 let camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 renderer1.setSize( (window.innerWidth), window.innerHeight );
-renderer1.setClearColor(0x111111)
 absoluteDiv.appendChild( renderer1.domElement );
+
+const textureLoader = new THREE.TextureLoader();
+
+const normalMap = textureLoader.load('./model/texture/NormalMap.png')
+
 const sphereGeometry = new THREE.SphereGeometry( 15, 32, 16 ); 
-const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
+const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x292929 ,texture:normalMap} ); 
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-scene1.add( sphere )
+
+const pointLight = new THREE.PointLight(0xffffff, 1); 
+pointLight.position.set(sphere.position.x + 2, sphere.position.y + 3, sphere.position.z + 4);pointLight.distance = 100; 
+pointLight.decay = 2;
+
+
+scene1.add(pointLight,sphere)
 //Setting camera position
 camera1.position.x = 0;
 camera1.position.y = 15;
