@@ -162,24 +162,23 @@ absoluteDiv.appendChild( renderer1.domElement );
 
 const textureLoader = new THREE.TextureLoader();
 
-const normalMap = textureLoader.load('./model/texture/NormalMap.png')
+const normalTexture = textureLoader.load('./model/texture/NormalMap.png')
 
 const sphereGeometry = new THREE.SphereGeometry( 15, 32, 16 ); 
-const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x292929 ,texture:normalMap} ); 
+const sphereMaterial = new THREE.MeshStandardMaterial( {  normalMap:normalTexture,metalness:0.7,roughness:0.2} ); 
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
 
-const pointLight = new THREE.PointLight(0xffffff, 1); 
-pointLight.position.set(sphere.position.x + 2, sphere.position.y + 3, sphere.position.z + 4);pointLight.distance = 100; 
-pointLight.decay = 2;
 
 
-scene1.add(pointLight,sphere)
+scene1.add(sphere)
 //Setting camera position
 camera1.position.x = 0;
 camera1.position.y = 15;
 camera1.position.z = 75;
 
-
+const ambientLight1 = new THREE.AmbientLight(0x432453,1)
+scene1.add(ambientLight1)
+renderer1.normalMapType = THREE.TangentSpaceNormalMap;
 
 
 const handleWheelEvent = (e) => {
@@ -233,6 +232,7 @@ plane.rotation.z-= .002
 // 	c.position.z=6
 // }
 // 		})
+
  }
 	
 animate()
