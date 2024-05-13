@@ -265,12 +265,11 @@ window.addEventListener('mousemove',e =>{
   raycaster.setFromCamera(mousePosition, camera);
   const intersects = raycaster.intersectObject(plane);
 
-  if(intersects.length>0){
-console.log(intersects)
-  }
+
   if (intersects.length > 0) {
 	pointLight2.position.copy(intersects[0].point)
 	pointLight2.position.y = 0.125
+	pointLight2.position.z += 10
   }
 
 
