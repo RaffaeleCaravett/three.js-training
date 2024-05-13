@@ -165,9 +165,10 @@ const textureLoader = new THREE.TextureLoader();
 const normalTexture = textureLoader.load('./model/texture/NormalMap.png')
 
 const sphereGeometry = new THREE.SphereGeometry( 15, 32, 16 ); 
-const sphereMaterial = new THREE.MeshStandardMaterial( {  normalMap:normalTexture,metalness:0.7,roughness:0.2} ); 
+const sphereMaterial = new THREE.MeshStandardMaterial( { wireframe:true, normalMap:normalTexture,metalness:0.7,roughness:0.2} ); 
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
 
+const controls1 = new OrbitControls( camera1, renderer1.domElement );
 
 
 scene1.add(sphere)
@@ -200,7 +201,8 @@ function animate() {
 torusKnot.rotateZ(0.01)
 const elapsedTime = clock.getElapsedTime()
 plane.rotation.z-= .002 
-
+sphere.rotateX(0.01)
+controls1.update()
 	// torus.rotation.x+=0.005
 	// torus1.rotation.x+=0.005
 	// torus2.rotation.x+=0.005
