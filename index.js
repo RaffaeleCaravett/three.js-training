@@ -177,14 +177,18 @@ camera1.position.y = 15;
 camera1.position.z = 75;
 
 const sphereLight = new THREE.SphereGeometry( 0.5, 16, 8 );
-let pointLight = new THREE.PointLight( 0xff0040, 90000 );
+let pointLight = new THREE.PointLight( 0xf300f0, 90000 );
 pointLight.add( new THREE.Mesh( sphereLight, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
 pointLight.position.set(-10,-10,3)
 
 const sphereLight1 = new THREE.SphereGeometry( 0.5, 16, 8 );
-let pointLight1 = new THREE.PointLight( 0xffffff, 90000 );
+let pointLight1 = new THREE.PointLight( 0x1f223f, 90000 );
 pointLight1.add( new THREE.Mesh( sphereLight1, new THREE.MeshBasicMaterial( { color: 0xffffff } ) ) );
-scene1.add(sphere,ambientLight1,pointLight, pointLight1 );
+
+const sphereLight2 = new THREE.SphereGeometry( 0.5, 16, 8 );
+let pointLight2 = new THREE.PointLight( 0xff22ff, 90000 );
+pointLight2.add( new THREE.Mesh( sphereLight2, new THREE.MeshBasicMaterial( { color: 0xffffff } ) ) );
+scene1.add(sphere,ambientLight1,pointLight, pointLight1, pointLight2);
 pointLight1.position.set(10,10,3)
 const handleWheelEvent = (e) => {
 if(e.wheelDelta<=0){
@@ -193,6 +197,11 @@ plane.material.displacementScale-=5
 	plane.material.displacementScale+=5
 
 }}
+let raycaster = new THREE.Raycaster();
+let mouse = new THREE.Vector2();
+
+	const mousePosition = new THREE.Vector2();
+
 
 
 document.addEventListener("wheel", handleWheelEvent);
@@ -208,9 +217,9 @@ plane.rotation.z-= .002
 sphere.rotateX(0.01)
 controls1.update()
 
-pointLight1.position.x = Math.sin( elapsedTime * 0.7 ) * 30;
-				pointLight1.position.y = Math.cos( elapsedTime * 0.5 ) * 40;
-				pointLight1.position.z = Math.cos( elapsedTime * 0.3 ) * 30;
+// pointLight2.position.x = Math.sin( elapsedTime * 0.7 ) * 30;
+// 				pointLight2.position.y = Math.cos( elapsedTime * 0.5 ) * 40;
+// 				pointLight2.position.z = Math.cos( elapsedTime * 0.3 ) * 30;
 	// torus.rotation.x+=0.005
 	// torus1.rotation.x+=0.005
 	// torus2.rotation.x+=0.005
@@ -246,6 +255,29 @@ pointLight1.position.x = Math.sin( elapsedTime * 0.7 ) * 30;
  }
 	
 animate()
+
+
+window.addEventListener('mousemove',e =>{
+	mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1;
+	mousePosition.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+
+  raycaster.setFromCamera(mousePosition, camera);
+  const intersects = raycaster.intersectObject(plane);
+
+  if(intersects.length>0){
+console.log(intersects)
+  }
+  if (intersects.length > 0) {
+	pointLight2.position.copy(intersects[0].point)
+	pointLight2.position.y = 0.125
+  }
+
+
+ 
+})
+
+
 window.addEventListener('resize',()=>{
 	if(window.innerWidth>768){
 	renderer.setSize( (window.innerWidth/2.1), window.innerHeight );
