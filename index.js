@@ -182,11 +182,10 @@ pointLight.add( new THREE.Mesh( sphereLight, new THREE.MeshBasicMaterial( { colo
 pointLight.position.set(-10,-10,3)
 
 const sphereLight1 = new THREE.SphereGeometry( 0.5, 16, 8 );
-let pointLight1 = new THREE.PointLight( 0x23ff30, 90000 );
-pointLight1.add( new THREE.Mesh( sphereLight1, new THREE.MeshBasicMaterial( { color: 0x215f250 } ) ) );
+let pointLight1 = new THREE.PointLight( 0xffffff, 90000 );
+pointLight1.add( new THREE.Mesh( sphereLight1, new THREE.MeshBasicMaterial( { color: 0xffffff } ) ) );
 scene1.add(sphere,ambientLight1,pointLight, pointLight1 );
 pointLight1.position.set(10,10,3)
-
 const handleWheelEvent = (e) => {
 if(e.wheelDelta<=0){
 plane.material.displacementScale-=5
@@ -208,6 +207,10 @@ const elapsedTime = clock.getElapsedTime()
 plane.rotation.z-= .002 
 sphere.rotateX(0.01)
 controls1.update()
+
+pointLight1.position.x = Math.sin( elapsedTime * 0.7 ) * 30;
+				pointLight1.position.y = Math.cos( elapsedTime * 0.5 ) * 40;
+				pointLight1.position.z = Math.cos( elapsedTime * 0.3 ) * 30;
 	// torus.rotation.x+=0.005
 	// torus1.rotation.x+=0.005
 	// torus2.rotation.x+=0.005
