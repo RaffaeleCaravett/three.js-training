@@ -165,22 +165,27 @@ const textureLoader = new THREE.TextureLoader();
 const normalTexture = textureLoader.load('./model/texture/NormalMap.png')
 
 const sphereGeometry = new THREE.SphereGeometry( 15, 32, 16 ); 
-const sphereMaterial = new THREE.MeshStandardMaterial( { wireframe:true, normalMap:normalTexture,metalness:0.7,roughness:0.2} ); 
+const sphereMaterial = new THREE.MeshStandardMaterial( {  normalMap:normalTexture,metalness:0.7,roughness:0.2} ); 
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
 
 const controls1 = new OrbitControls( camera1, renderer1.domElement );
 
-
-scene1.add(sphere)
+const ambientLight1 = new THREE.AmbientLight(0xffffff,0.1)
 //Setting camera position
 camera1.position.x = 0;
 camera1.position.y = 15;
 camera1.position.z = 75;
 
-const ambientLight1 = new THREE.AmbientLight(0x432453,1)
-scene1.add(ambientLight1)
-renderer1.normalMapType = THREE.TangentSpaceNormalMap;
+const sphereLight = new THREE.SphereGeometry( 0.5, 16, 8 );
+let pointLight = new THREE.PointLight( 0xff0040, 90000 );
+pointLight.add( new THREE.Mesh( sphereLight, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
+pointLight.position.set(-10,-10,3)
 
+const sphereLight1 = new THREE.SphereGeometry( 0.5, 16, 8 );
+let pointLight1 = new THREE.PointLight( 0x23ff30, 90000 );
+pointLight1.add( new THREE.Mesh( sphereLight1, new THREE.MeshBasicMaterial( { color: 0x215f250 } ) ) );
+scene1.add(sphere,ambientLight1,pointLight, pointLight1 );
+pointLight1.position.set(10,10,3)
 
 const handleWheelEvent = (e) => {
 if(e.wheelDelta<=0){
