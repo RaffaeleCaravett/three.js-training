@@ -190,6 +190,21 @@ let pointLight2 = new THREE.PointLight( 0xff22ff, 90000 );
 pointLight2.add( new THREE.Mesh( sphereLight2, new THREE.MeshBasicMaterial( { color: 0xffffff } ) ) );
 scene1.add(sphere,ambientLight1,pointLight, pointLight1, pointLight2);
 pointLight1.position.set(10,10,3)
+
+const seconddAbsoluteDiv = document.getElementsByClassName('position-absolute')[1]
+
+let scene2 = new THREE.Scene()
+const renderer2 = new THREE.WebGLRenderer({alpha:true});
+let camera2 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+renderer2.setSize(window.innerWidth, window.innerHeight );
+seconddAbsoluteDiv.appendChild( renderer2.domElement );
+
+const sphereLight3 = new THREE.SphereGeometry( 0.4, 16, 8 );
+let pointLight3 = new THREE.PointLight( 0xf300f0, 90000 );
+pointLight3.add( new THREE.Mesh( sphereLight3, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
+const ambientLight2 = new THREE.AmbientLight(0xffffff,0.1)
+scene2.add(pointLight3,ambientLight2)
+camera2.position.set(0,0,30)
 const handleWheelEvent = (e) => {
 if(e.wheelDelta<=0){
 plane.material.displacementScale-=5
@@ -211,15 +226,16 @@ function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 	renderer1.render( scene1, camera1 );
+	renderer2.render( scene2, camera2 );
 torusKnot.rotateZ(0.01)
 const elapsedTime = clock.getElapsedTime()
 plane.rotation.z-= .002 
 sphere.rotateX(0.01)
 controls1.update()
 
-// pointLight2.position.x = Math.sin( elapsedTime * 0.7 ) * 30;
-// 				pointLight2.position.y = Math.cos( elapsedTime * 0.5 ) * 40;
-// 				pointLight2.position.z = Math.cos( elapsedTime * 0.3 ) * 30;
+pointLight3.position.x = Math.sin( elapsedTime * 0.7 ) * 10;
+				pointLight3.position.y = Math.cos( elapsedTime * 0.5 ) * 20;
+				pointLight3.position.z = Math.cos( elapsedTime * 0.3 ) * 10;
 	// torus.rotation.x+=0.005
 	// torus1.rotation.x+=0.005
 	// torus2.rotation.x+=0.005
