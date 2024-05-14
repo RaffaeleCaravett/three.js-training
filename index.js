@@ -199,11 +199,25 @@ let camera2 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHe
 renderer2.setSize(window.innerWidth, window.innerHeight );
 seconddAbsoluteDiv.appendChild( renderer2.domElement );
 
-const sphereLight3 = new THREE.SphereGeometry( 0.4, 16, 8 );
-let pointLight3 = new THREE.PointLight( 0xf300f0, 90000 );
-pointLight3.add( new THREE.Mesh( sphereLight3, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
+let pointLights=[]
+
+for(let i =0 ; i<=100;i++){
+	const sphereLight3 = new THREE.SphereGeometry( 0.4, 16, 8 );
+	let pointLight3 = new THREE.PointLight( 0xf300f0, 90000 );
+	const r = Math.random();
+    const g = Math.random();
+    const b = Math.random();
+    
+    const color = new THREE.Color(r, g, b);
+    pointLight3.add( new THREE.Mesh( sphereLight3, new THREE.MeshBasicMaterial( { color: color} ) ) );
+	pointLights.push(pointLight3)
+}
+	
 const ambientLight2 = new THREE.AmbientLight(0xffffff,0.1)
-scene2.add(pointLight3,ambientLight2)
+scene2.add(ambientLight2)
+for ( let p of pointLights){
+scene2.add(p)
+}
 camera2.position.set(0,0,30)
 const handleWheelEvent = (e) => {
 if(e.wheelDelta<=0){
@@ -233,9 +247,15 @@ plane.rotation.z-= .002
 sphere.rotateX(0.01)
 controls1.update()
 
-pointLight3.position.x = Math.sin( elapsedTime * 0.7 ) * 10;
-				pointLight3.position.y = Math.cos( elapsedTime * 0.5 ) * 20;
-				pointLight3.position.z = Math.cos( elapsedTime * 0.3 ) * 10;
+for ( let p of pointLights){
+	let randomNumberTen = Math.random()*10
+	let randomNumberTwenty = Math.random()*20
+
+	p.position.x = Math.sin( elapsedTime * 0.7 ) * randomNumberTen;
+				p.position.y = Math.cos( elapsedTime * 0.5 ) * randomNumberTwenty;
+				p.position.z = Math.cos( elapsedTime * 0.3 ) * randomNumberTen;
+	}
+
 	// torus.rotation.x+=0.005
 	// torus1.rotation.x+=0.005
 	// torus2.rotation.x+=0.005
