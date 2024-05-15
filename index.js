@@ -247,14 +247,7 @@ plane.rotation.z-= .002
 sphere.rotateX(0.01)
 controls1.update()
 
-for ( let p of pointLights){
-	let randomNumberTen = Math.random()*10
-	let randomNumberTwenty = Math.random()*20
 
-	p.position.x = Math.sin( elapsedTime * 0.7 ) * randomNumberTen;
-				p.position.y = Math.cos( elapsedTime * 0.5 ) * randomNumberTwenty;
-				p.position.z = Math.cos( elapsedTime * 0.3 ) * randomNumberTen;
-	}
 
 	// torus.rotation.x+=0.005
 	// torus1.rotation.x+=0.005
