@@ -321,7 +321,18 @@ window.addEventListener('mousemove',e =>{
 window.addEventListener('resize',()=>{
 	if(window.innerWidth>768){
 	renderer.setSize( (window.innerWidth/2.1), window.innerHeight );
+		camera.aspect = (window.innerWidth/2.1) / window.innerHeight;
+		 camera.updateProjectionMatrix();
 	}else{
 		renderer.setSize((window.innerWidth/1.1), window.innerHeight );
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
 	}
+	renderer1.setSize(window.innerWidth, window.innerHeight );
+	renderer2.setSize(window.innerWidth, window.innerHeight );
+	camera1.aspect = window.innerWidth / window.innerHeight;
+    camera1.updateProjectionMatrix();
+
+    camera2.aspect = window.innerWidth / window.innerHeight;
+    camera2.updateProjectionMatrix();
 })
