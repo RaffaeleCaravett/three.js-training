@@ -12,7 +12,7 @@ canvas.appendChild( renderer.domElement );
 renderer.setClearColor(0x999999)
 let pointLights=[]
 
-for(let i =0 ; i<=1000;i++){
+for(let i =0 ; i<=10000;i++){
 	const sphereLight = new THREE.SphereGeometry( 0.05, 4, 2 );
 	let pointLight = new THREE.PointLight( 0xf300f0, 90000 );
 	// const r = Math.random();
