@@ -201,15 +201,15 @@ seconddAbsoluteDiv.appendChild( renderer2.domElement );
 
 let pointLights=[]
 
-for(let i =0 ; i<=100;i++){
-	const sphereLight3 = new THREE.SphereGeometry( 0.4, 16, 8 );
+for(let i =0 ; i<=1000;i++){
+	const sphereLight3 = new THREE.SphereGeometry( 0.05, 4, 2 );
 	let pointLight3 = new THREE.PointLight( 0xf300f0, 90000 );
-	const r = Math.random();
-    const g = Math.random();
-    const b = Math.random();
+	// const r = Math.random();
+    // const g = Math.random();
+    // const b = Math.random();
     
-    const color = new THREE.Color(r, g, b);
-    pointLight3.add( new THREE.Mesh( sphereLight3, new THREE.MeshBasicMaterial( { color: color} ) ) );
+    // const color = new THREE.Color(r, g, b);
+    pointLight3.add( new THREE.Mesh( sphereLight3, new THREE.MeshBasicMaterial( { color: 0xFFD700} ) ) );
 	pointLights.push(pointLight3)
 }
 	
@@ -227,10 +227,20 @@ plane.material.displacementScale-=5
 
 }}
 let raycaster = new THREE.Raycaster();
-let mouse = new THREE.Vector2();
 
 	const mousePosition = new THREE.Vector2();
-
+	for ( let p of pointLights){
+		const elapsedTime = clock.getElapsedTime()
+	
+		let randomNumberTwentyOne = Math.random()*70-35
+		let randomNumberTwentyTwo = Math.random()*71-35.5
+		let randomNumberThirty = Math.random()*70-35
+	
+		p.position.x = randomNumberTwentyOne;
+					p.position.y = randomNumberTwentyTwo;
+					p.position.z = randomNumberThirty;
+		}
+	
 
 
 document.addEventListener("wheel", handleWheelEvent);
@@ -246,6 +256,8 @@ const elapsedTime = clock.getElapsedTime()
 plane.rotation.z-= .002 
 sphere.rotateX(0.01)
 controls1.update()
+scene2.rotation.y+=0.001
+scene2.rotation.z+=0.001
 
 
 
