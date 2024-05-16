@@ -13,50 +13,56 @@ canvas.appendChild( renderer.domElement );
 renderer.setClearColor(0x999999)
 let pointLights=[]
 
-for(let i =0 ; i<=10000;i++){
-	const sphereLight = new THREE.SphereGeometry( 0.05, 4, 2 );
-	let pointLight = new THREE.PointLight( 0xf300f0, 90000 );
-	// const r = Math.random();
-    // const g = Math.random();
-    // const b = Math.random();
-    
-    // const color = new THREE.Color(r, g, b);
-    pointLight.add( new THREE.Mesh( sphereLight, new THREE.MeshBasicMaterial( { color: 0xFFD700} ) ) );
-	pointLights.push(pointLight)
-}
+
 	
 const ambientLight = new THREE.AmbientLight(0xffffff,0.1)
 scene.add(ambientLight)
-for ( let p of pointLights){
-scene.add(p)
-}
-camera.position.set(0,0,30)
+
+camera.position.set(0,0,140)
 
 let raycaster = new THREE.Raycaster();
 
 	const mousePosition = new THREE.Vector2();
-	for ( let p of pointLights){
 	
-		let randomNumberTwentyOne = Math.random()*70-35
-		let randomNumberTwentyTwo = Math.random()*71-35.5
-		let randomNumberThirty = Math.random()*70-35
-	
-		p.position.x = randomNumberTwentyOne;
-					p.position.y = randomNumberTwentyTwo;
-					p.position.z = randomNumberThirty;
-		}
 
-        const loader = new GLTFLoader();
-
-        loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
-            (glb) => {
-                let model = glb.scene;
-                scene.add(model);
-            }
-        )
        
     
-    
+    for(let i =0 ; i<=10000;i++){
+    const geometry = new THREE.SphereGeometry( 0.5,1, 0.5 ); 
+    const material = new THREE.MeshBasicMaterial( { color: 0xFFD700 } ); 
+    const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
+	pointLights.push(sphere)
+    for ( let p of pointLights){
+	
+		let randomNumberTwentyOne = Math.random()*220-115
+		let randomNumberTwentyTwo = Math.random()*221-115.5
+		let randomNumberThirty = Math.random()*220-115
+	
+		p.position.x = randomNumberTwentyOne;  
+					p.position.y = randomNumberTwentyTwo;
+					p.position.z = randomNumberThirty;
+		}      
+}
+const loader = new GLTFLoader();
+
+loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
+    (glb) => {
+        let model = glb.scene;
+        scene.add(model);
+         
+        model.scale.divide(new THREE.Vector3(.1,.1,.1));
+      
+  for ( let p of pointLights){
+            scene.add(p)
+            }
+    },
+    (xhr) => {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    },
+    (error) => {
+        console.error('Error loading GLB model:', error);
+    }
+)
     
 
 
