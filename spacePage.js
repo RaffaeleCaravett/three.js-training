@@ -28,7 +28,7 @@ let raycaster = new THREE.Raycaster();
        
     
     for(let i =0 ; i<=10000;i++){
-    const geometry = new THREE.SphereGeometry( 0.5,1, 0.5 ); 
+    const geometry = new THREE.SphereGeometry( 0.25,.5, 0.25 ); 
     const material = new THREE.MeshBasicMaterial( { color: 0xFFD700 } ); 
     const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
 	pointLights.push(sphere)
