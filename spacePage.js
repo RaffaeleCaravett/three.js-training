@@ -1,6 +1,7 @@
 import * as THREE from './node_modules/three/build/three.module.js';
 import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
 import * as dat from './node_modules/dat.gui/build/dat.gui.module.js'; 
+import {GLTFLoader} from "./node_modules/three/examples/jsm/loaders/GLTFLoader.js";
 
 const canvas = document.getElementsByClassName('canvas')[0]
 
@@ -44,9 +45,19 @@ let raycaster = new THREE.Raycaster();
 					p.position.y = randomNumberTwentyTwo;
 					p.position.z = randomNumberThirty;
 		}
-	
 
+        const loader = new GLTFLoader();
 
+        loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
+            (glb) => {
+                let model = glb.scene;
+                scene.add(model);
+            }
+        )
+       
+    
+    
+    
 
 
 function animate() {
