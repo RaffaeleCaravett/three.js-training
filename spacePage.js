@@ -69,8 +69,8 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
-scene.rotation.y+=0.001
-scene.rotation.z+=0.001
+// scene.rotation.y+=0.001
+// scene.rotation.z+=0.001
 
  }
 	
