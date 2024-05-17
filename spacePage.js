@@ -100,3 +100,26 @@ window.addEventListener('resize',()=>{
 		camera.updateProjectionMatrix();
 	
 })
+
+
+let input1 = document.getElementsByClassName('form-control')[0]
+let input2 = document.getElementsByClassName('form-control')[1]
+let input3 = document.getElementsByClassName('form-control')[2]
+let input4 = document.getElementsByClassName('form-control')[3]
+let input5 = document.getElementsByClassName('form-control')[4]
+
+input2.style.display='none'
+input3.style.display='none'
+input4.style.display='none'
+input5.style.display='none'
+
+let label1 = document.getElementsByClassName('label')[0]
+let label2 = document.getElementsByClassName('label')[1]
+let label3 = document.getElementsByClassName('label')[2]
+let label4 = document.getElementsByClassName('label')[3]
+let label5 = document.getElementsByClassName('label')[4]
+
+label2.style.display='none'
+label3.style.display='none'
+label4.style.display='none'
+label5.style.display='none'
