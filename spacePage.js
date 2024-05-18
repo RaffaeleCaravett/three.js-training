@@ -265,3 +265,16 @@ switch(initialCount){
 }
 
 checkStatus('')
+
+arrow1.addEventListener('click', () =>{
+initialCount-=1
+checkStatus('indietro')
+})
+        arrow2.addEventListener('click', () =>{
+            initialCount+=1
+            checkStatus('avanti')
+            })
+
+        check1.addEventListener('click', () =>{
+            console.log('ok')
+            })
