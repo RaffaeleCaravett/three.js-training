@@ -11,7 +11,7 @@ let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHei
 renderer.setSize(window.innerWidth, window.innerHeight );
 canvas.appendChild( renderer.domElement );
 let pointLights=[]
-
+let pointLights1=[]
 
 	
 const ambientLight = new THREE.AmbientLight(0xffffff,0.1)
@@ -32,7 +32,7 @@ const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 
     
-for(let i =0 ; i<=10000;i++){
+for(let i =0 ; i<=5000;i++){
     const geometry = new THREE.SphereGeometry( 0.25,.5, 0.25 ); 
     const material = new THREE.MeshBasicMaterial( { color: 0xFFD700 } ); 
     const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
@@ -49,7 +49,37 @@ for ( let p of pointLights){
                 p.position.y = randomNumberTwentyTwo;
                 p.position.z = randomNumberThirty;
                 cube.add(p)
-    }      
+    } 
+    
+    
+
+    const geometry1 = new THREE.BoxGeometry( .1, .1, .1 ); 
+    const material1 = new THREE.MeshBasicMaterial( {color: 0x000000} ); 
+    const cube1 = new THREE.Mesh( geometry1, material1 ); 
+    scene.add( cube1 );
+    
+        
+    for(let i =0 ; i<=5000;i++){
+        const geometry = new THREE.SphereGeometry( 0.25,.5, 0.25 ); 
+        const material = new THREE.MeshBasicMaterial( { color: 0xFFD700 } ); 
+        const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
+        pointLights1.push(sphere)
+        
+    }
+    for ( let p of pointLights1){
+        
+        let randomNumberTwentyOne = Math.random()*220-115
+        let randomNumberTwentyTwo = Math.random()*221-115.5
+        let randomNumberThirty = Math.random()*220-115
+    
+        p.position.x = randomNumberTwentyOne;  
+                    p.position.y = randomNumberTwentyTwo;
+                    p.position.z = randomNumberThirty;
+                    cube1.add(p)
+        } 
+
+
+
 const loader = new GLTFLoader();
 
 loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
@@ -75,8 +105,10 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
 function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
-  cube.rotation.y+=0.001
-  cube.rotation.z+=0.001
+  cube.rotation.y+=0.0005
+  cube.rotation.z+=0.0005
+  cube1.rotation.y-=0.0005
+  cube1.rotation.z-=0.0005
 
  }
 	
