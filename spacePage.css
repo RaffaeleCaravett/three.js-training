@@ -6,5 +6,7 @@ height: 100vh;
     h1{
         font-size: 70px;
     }
-  
+    .canvas{
+        pointer-events:none
+    }
 }

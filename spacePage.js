@@ -13,7 +13,6 @@ canvas.appendChild( renderer.domElement );
 let pointLights=[]
 let pointLights1=[]
 
-	
 const ambientLight = new THREE.AmbientLight(0xffffff,0.1)
 scene.add(ambientLight)
 
@@ -154,7 +153,6 @@ let arrow2 = document.getElementsByClassName('arrow')[1]
 let check1 = document.getElementsByClassName('check')[0]
 
 const checkStatus = (param) => {
-    console.log('ihih')
 if(param=='avanti'&& initialCount<5){
     initialCount+=1
 }
