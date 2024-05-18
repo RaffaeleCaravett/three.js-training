@@ -161,7 +161,7 @@ else if(param=='indietro'&&initialCount>1){
 }else{
     initialCount=initialCount
 }
-
+console.log(initialCount)
 switch(initialCount){
     case 1 :{
         label2.style.display='none'
@@ -195,8 +195,8 @@ switch(initialCount){
         input2.style.display='block'
         label2.style.display='block'
 
-        arrow1.style.display='block'
-        arrow2.style.display='block'
+        arrow1.style.display='inline'
+        arrow2.style.display='inline'
 
         check1.style.display='none'
     }
@@ -212,10 +212,10 @@ switch(initialCount){
         input5.style.display='none'
 
         input3.style.display='block'
-        label4.style.display='block'
+        label3.style.display='block'
 
-        arrow1.style.display='block'
-        arrow2.style.display='block'
+        arrow1.style.display='inline'
+        arrow2.style.display='inline'
 
         check1.style.display='none'
     }
@@ -233,8 +233,8 @@ switch(initialCount){
         input4.style.display='block'
         label4.style.display='block'
 
-        arrow1.style.display='block'
-        arrow2.style.display='block'
+        arrow1.style.display='inline'
+        arrow2.style.display='inline'
 
         check1.style.display='none'
     }
@@ -252,10 +252,10 @@ switch(initialCount){
         input5.style.display='block'
         label5.style.display='block'
 
-        arrow1.style.display='block'
+        arrow1.style.display='inline'
         arrow2.style.display='none'
 
-        check1.style.display='block'
+        check1.style.display='inline'
     }
     break;
 }
@@ -265,11 +265,9 @@ switch(initialCount){
 checkStatus('')
 
 arrow1.addEventListener('click', () =>{
-initialCount-=1
 checkStatus('indietro')
 })
         arrow2.addEventListener('click', () =>{
-            initialCount+=1
             checkStatus('avanti')
             })
 
