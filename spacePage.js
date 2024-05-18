@@ -132,7 +132,7 @@ window.addEventListener('resize',()=>{
 		camera.updateProjectionMatrix();
 	
 })
-
+let initialCount = 1;
 
 let input1 = document.getElementsByClassName('form-control')[0]
 let input2 = document.getElementsByClassName('form-control')[1]
@@ -140,10 +140,7 @@ let input3 = document.getElementsByClassName('form-control')[2]
 let input4 = document.getElementsByClassName('form-control')[3]
 let input5 = document.getElementsByClassName('form-control')[4]
 
-input2.style.display='none'
-input3.style.display='none'
-input4.style.display='none'
-input5.style.display='none'
+
 
 let label1 = document.getElementsByClassName('label')[0]
 let label2 = document.getElementsByClassName('label')[1]
@@ -151,7 +148,100 @@ let label3 = document.getElementsByClassName('label')[2]
 let label4 = document.getElementsByClassName('label')[3]
 let label5 = document.getElementsByClassName('label')[4]
 
-label2.style.display='none'
-label3.style.display='none'
-label4.style.display='none'
-label5.style.display='none'
+
+let arrow1 = document.getElementsByClassName('arrow')[0]
+let arrow2 = document.getElementsByClassName('arrow')[1]
+let check1 = document.getElementsByClassName('check')[0]
+
+const checkStatus = (param) => {
+    console.log('ihih')
+if(param=='avanti'&& initialCount<5){
+    initialCount+=1
+}
+else if(param=='indietro'&&initialCount>1){
+    initialCount-=1
+}else{
+    initialCount=initialCount
+}
+
+switch(initialCount){
+    case 1 :{
+        label2.style.display='none'
+        label3.style.display='none'
+        label4.style.display='none'
+        label5.style.display='none'
+        input2.style.display='none'
+        input3.style.display='none'
+        input4.style.display='none'
+        input5.style.display='none'
+        
+        input1.style.display='block'
+        label1.style.display='block'
+
+        arrow1.style.display='none'
+        arrow2.style.display='block'
+
+        check1.style.display='none'
+    }
+    break;
+    case 2 :{
+        label1.style.display='none'
+        label3.style.display='none'
+        label4.style.display='none'
+        label5.style.display='none'
+        input1.style.display='none'
+        input3.style.display='none'
+        input4.style.display='none'
+        input5.style.display='none'
+
+        input2.style.display='block'
+        label2.style.display='block'
+    }
+    break;
+    case 3 :{
+        label1.style.display='none'
+        label2.style.display='none'
+        label4.style.display='none'
+        label5.style.display='none'
+        input1.style.display='none'
+        input2.style.display='none'
+        input4.style.display='none'
+        input5.style.display='none'
+
+        input3.style.display='block'
+        label4.style.display='block'
+    }
+    break;
+    case 4 :{
+        label1.style.display='none'
+        label2.style.display='none'
+        label3.style.display='none'
+        label5.style.display='none'
+        input1.style.display='none'
+        input2.style.display='none'
+        input3.style.display='none'
+        input5.style.display='none'
+
+        input4.style.display='block'
+        label4.style.display='block'
+    }
+    break;
+    case 5 :{
+        label1.style.display='none'
+        label2.style.display='none'
+        label3.style.display='none'
+        label4.style.display='none'
+        input1.style.display='none'
+        input2.style.display='none'
+        input3.style.display='none'
+        input4.style.display='none'
+
+        input5.style.display='block'
+        label5.style.display='block'
+    }
+    break;
+}
+
+}
+
+checkStatus('')
