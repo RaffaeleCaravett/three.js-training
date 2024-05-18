@@ -196,6 +196,11 @@ switch(initialCount){
 
         input2.style.display='block'
         label2.style.display='block'
+
+        arrow1.style.display='block'
+        arrow2.style.display='block'
+
+        check1.style.display='none'
     }
     break;
     case 3 :{
@@ -210,6 +215,11 @@ switch(initialCount){
 
         input3.style.display='block'
         label4.style.display='block'
+
+        arrow1.style.display='block'
+        arrow2.style.display='block'
+
+        check1.style.display='none'
     }
     break;
     case 4 :{
@@ -224,6 +234,11 @@ switch(initialCount){
 
         input4.style.display='block'
         label4.style.display='block'
+
+        arrow1.style.display='block'
+        arrow2.style.display='block'
+
+        check1.style.display='none'
     }
     break;
     case 5 :{
@@ -238,6 +253,11 @@ switch(initialCount){
 
         input5.style.display='block'
         label5.style.display='block'
+
+        arrow1.style.display='block'
+        arrow2.style.display='none'
+
+        check1.style.display='block'
     }
     break;
 }
