@@ -80,10 +80,10 @@ for ( let p of pointLights){
 
 
 const loader = new GLTFLoader();
-
+let model;
 loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
     (glb) => {
-        let model = glb.scene;
+        model = glb.scene;
         scene.add(model);
          
         model.scale.divide(new THREE.Vector3(.09,.09,.09));
@@ -152,7 +152,11 @@ let arrow1 = document.getElementsByClassName('arrow')[0]
 let arrow2 = document.getElementsByClassName('arrow')[1]
 let check1 = document.getElementsByClassName('check')[0]
 
+let previousCountValue=0;
+
+
 const checkStatus = (param) => {
+    previousCountValue=initialCount;  
 if(param=='avanti'&& initialCount<5){
     initialCount+=1
 }
@@ -161,7 +165,6 @@ else if(param=='indietro'&&initialCount>1){
 }else{
     initialCount=initialCount
 }
-console.log(initialCount)
 switch(initialCount){
     case 1 :{
         label2.style.display='none'
@@ -258,6 +261,7 @@ switch(initialCount){
         check1.style.display='inline'
     }
     break;
+
 }
 
 }
@@ -266,11 +270,37 @@ checkStatus('')
 
 arrow1.addEventListener('click', () =>{
 checkStatus('indietro')
+setModelPosition()
 })
         arrow2.addEventListener('click', () =>{
             checkStatus('avanti')
+            setModelPosition()
             })
 
         check1.addEventListener('click', () =>{
             console.log('ok')
+            setModelPosition()
             })
+
+let interval ;
+
+            const setModelPosition=()=>{
+                clearInterval(interval)
+                if(previousCountValue>initialCount){
+                    interval= setInterval(()=>{
+                        model.position.x-=1
+                    },10)
+                    setTimeout(()=>{
+clearInterval(interval)
+                    },3000)
+                }else if (previousCountValue<initialCount){
+                    interval= setInterval(()=>{
+                        model.position.x+=1
+                    },10)
+                    setTimeout(()=>{
+clearInterval(interval)
+                    },3000)
+                }else{
+
+                }
+            }
