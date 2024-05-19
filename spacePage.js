@@ -31,6 +31,9 @@ const material = new THREE.MeshBasicMaterial( {color: 0x000000} );
 const cube = new THREE.Mesh( geometry, material ); 
 scene.add( cube );
 
+const vehicle = new YUKA.Vehicle();
+
+
     
 for(let i =0 ; i<=5000;i++){
     const geometry = new THREE.SphereGeometry( 0.25,.5, 0.25 ); 
@@ -78,7 +81,9 @@ for ( let p of pointLights){
                     cube1.add(p)
         } 
 
-
+function sync (entity,renderComponent){
+    renderComponent.matrix.copy(entity.worldMatrix)
+}
 
 const loader = new GLTFLoader();
 let model;
@@ -90,7 +95,7 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
         model.scale.divide(new THREE.Vector3(.09,.09,.09));
         model.position.x=-190
         model.rotateY(2)
-      
+      vehicle.setRenderComponent(model,sync)
     },
     (xhr) => {
         console.log((xhr.loaded / xhr.total * 100) + '% loaded');
@@ -100,7 +105,37 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
     }
 )
     
+const target = new YUKA.GameEntity();
 
+
+
+const path = new YUKA.Path()
+
+path.add(new YUKA.Vector3(-6,0,0))
+path.add(new YUKA.Vector3(-4,0,-4))
+path.add(new YUKA.Vector3(0,0,0))
+path.add(new YUKA.Vector3(4,0,-4))
+path.add(new YUKA.Vector3(6,0,0))
+path.add(new YUKA.Vector3(4,0,4))
+path.add(new YUKA.Vector3(0,0,6))
+
+vehicle.position.copy(path.current())
+
+const followPathBehavior = new YUKA.FollowPathBehavior(path,0.5)
+vehicle.steering.add(followPathBehavior);
+
+
+
+// const seekBehavior = new YUKA.ArriveBehavior(target.position,3,1);
+// vehicle.steering.add(seekBehavior);
+vehicle.position.set(0,0,0)
+vehicle.maxSpeed=3
+
+
+const entityManager = new YUKA.EntityManager();
+entityManager.add(vehicle)
+entityManager.add(target);
+const time = new YUKA.Time()
 
 function animate() {
 	requestAnimationFrame( animate );
@@ -109,7 +144,8 @@ function animate() {
   cube.rotation.z+=0.0005
   cube1.rotation.y-=0.0005
   cube1.rotation.z-=0.0005
-
+  const delta = time.update().getDelta();
+entityManager.update(delta)
  }
 	
 animate()
@@ -271,50 +307,56 @@ checkStatus('')
 
 arrow1.addEventListener('click', () =>{
 checkStatus('indietro')
-setModelPosition()
+switch(initialCount){
+case(1):{
+target.position.set(10,20,0)
+}
+break;
+case(2):{
+target.position.set(30,20,0)
+
+}
+break;
+case(3):{
+target.position.set(40,20,0)
+
+}
+break;
+case(4):{
+target.position.set(10,200,0)
+
+}
+break;
+}
 })
         arrow2.addEventListener('click', () =>{
             checkStatus('avanti')
-            setModelPosition()
+            switch(initialCount){
+                case(2):{
+                target.position.set(100,20,0)
+                }
+                break;
+                case(3):{
+                target.position.set(50,200,0)
+                }
+                break;
+                case(4):{
+                target.position.set(10,50,0)
+                }
+                break;
+                case(5):{
+                target.position.set(300,40,0)
+                }
+                break;
+                }
             })
 
         check1.addEventListener('click', () =>{
             console.log('ok')
-            setModelPosition()
+            ()
+            
             })
 
-let interval ;
 
-            const setModelPosition=()=>{
-                clearInterval(interval)
-                if(previousCountValue>initialCount){
-                   interval=setInterval(()=>{
-                    model.rotation.y+=0.025
-                   },10) 
-                   setTimeout(()=>{
-                    clearInterval(interval)
-   interval= setInterval(()=>{
-                        model.position.x-=0.01
-                    },10)
-                    setTimeout(()=>{
-clearInterval(interval)
-                    },3000)
-                   },3000)
-                 
-                }else if (previousCountValue<initialCount){
-                    interval=setInterval(()=>{
-                        model.rotation.y-=0.025
-                    },10)
-                    setTimeout(()=>{
-                        clearInterval(interval)
-   interval= setInterval(()=>{
-                        model.position.x+=1
-                    },10)
-                    setTimeout(()=>{
-clearInterval(interval)
-                    },3000)
-                    }),3000
-                }else{
 
-                }
-            }
+            
