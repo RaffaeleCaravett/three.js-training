@@ -2,6 +2,7 @@ import * as THREE from './node_modules/three/build/three.module.js';
 import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
 import * as dat from './node_modules/dat.gui/build/dat.gui.module.js'; 
 import {GLTFLoader} from "./node_modules/three/examples/jsm/loaders/GLTFLoader.js";
+import * as YUKA from './node_modules/yuka/build/yuka.module.js'
 
 const canvas = document.getElementsByClassName('canvas')[0]
 
@@ -287,19 +288,32 @@ let interval ;
             const setModelPosition=()=>{
                 clearInterval(interval)
                 if(previousCountValue>initialCount){
-                    interval= setInterval(()=>{
-                        model.position.x-=1
+                   interval=setInterval(()=>{
+                    model.rotation.y+=0.025
+                   },10) 
+                   setTimeout(()=>{
+                    clearInterval(interval)
+   interval= setInterval(()=>{
+                        model.position.x-=0.01
                     },10)
                     setTimeout(()=>{
 clearInterval(interval)
                     },3000)
+                   },3000)
+                 
                 }else if (previousCountValue<initialCount){
-                    interval= setInterval(()=>{
+                    interval=setInterval(()=>{
+                        model.rotation.y-=0.025
+                    },10)
+                    setTimeout(()=>{
+                        clearInterval(interval)
+   interval= setInterval(()=>{
                         model.position.x+=1
                     },10)
                     setTimeout(()=>{
 clearInterval(interval)
                     },3000)
+                    }),3000
                 }else{
 
                 }
