@@ -121,6 +121,7 @@ for ( let p of pointLights){
 
 const loader = new GLTFLoader();
 let model;
+let mixer;
 loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
     (glb) => {
         model = glb.scene;
@@ -136,6 +137,10 @@ vehicle.scale = new YUKA.Vector3(5, 5, 5);
      target.position.y=-50
      target.position.z=25
         model.rotateY(2)
+        mixer = new THREE.AnimationMixer(model);
+        glb.animations.forEach((clip) => {
+            mixer.clipAction(clip).play();
+        });
     },
     (xhr) => {
         console.log((xhr.loaded / xhr.total * 100) + '% loaded');
@@ -155,6 +160,7 @@ function animate() {
   cube1.rotation.z-=0.0005
   const delta = time.update().getDelta();
     entityManager.update(delta);
+    if (mixer) mixer.update(delta);
  }
 	
 animate()
@@ -297,7 +303,7 @@ switch(initialCount){
 
         check1.style.display='none'
         target.position.x=85
-        target.position.y=40
+        target.position.y=20
         target.position.z=-50   
     }
     break;
@@ -319,7 +325,7 @@ switch(initialCount){
 
         check1.style.display='inline'
         target.position.x=250
-        target.position.y=80
+        target.position.y=180
         target.position.z=-50  
     }
     break;
