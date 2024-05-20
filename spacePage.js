@@ -14,6 +14,35 @@ canvas.appendChild( renderer.domElement );
 let pointLights=[]
 let pointLights1=[]
 
+const vehicleGeometry = new THREE.ConeGeometry(0.1, 0.5, 8);
+vehicleGeometry.rotateX(Math.PI * 0.5);
+const vehicleMaterial = new THREE.MeshNormalMaterial();
+const vehicleMesh = new THREE.Mesh(vehicleGeometry, vehicleMaterial);
+vehicleMesh.matrixAutoUpdate = false;
+scene.add(vehicleMesh);
+
+const vehicle = new YUKA.Vehicle();
+
+vehicle.setRenderComponent(vehicleMesh, sync);
+
+function sync(entity, renderComponent) {
+    renderComponent.matrix.copy(entity.worldMatrix);
+}
+
+const path = new YUKA.Path();
+path.add( new YUKA.Vector3(-4, 0, 4));
+path.add( new YUKA.Vector3(-6, 0, 0));
+path.add( new YUKA.Vector3(-4, 0, -4));
+path.add( new YUKA.Vector3(0, 0, 0));
+path.add( new YUKA.Vector3(4, 0, -4));
+path.add( new YUKA.Vector3(6, 0, 0));
+path.add( new YUKA.Vector3(4, 0, 4));
+path.add( new YUKA.Vector3(0, 0, 6));
+
+path.loop = true;
+
+vehicle.position.copy(path.current());
+
 const ambientLight = new THREE.AmbientLight(0xffffff,0.1)
 scene.add(ambientLight)
 
@@ -24,14 +53,11 @@ let raycaster = new THREE.Raycaster();
 	const mousePosition = new THREE.Vector2();
 	
 
-       
-
 const geometry = new THREE.BoxGeometry( .1, .1, .1 ); 
 const material = new THREE.MeshBasicMaterial( {color: 0x000000} ); 
 const cube = new THREE.Mesh( geometry, material ); 
 scene.add( cube );
 
-const vehicle = new YUKA.Vehicle();
 
 
     
@@ -81,9 +107,7 @@ for ( let p of pointLights){
                     cube1.add(p)
         } 
 
-function sync (entity,renderComponent){
-    renderComponent.matrix.copy(entity.worldMatrix)
-}
+
 
 const loader = new GLTFLoader();
 let model;
@@ -95,7 +119,6 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
         model.scale.divide(new THREE.Vector3(.09,.09,.09));
         model.position.x=-190
         model.rotateY(2)
-      vehicle.setRenderComponent(model,sync)
     },
     (xhr) => {
         console.log((xhr.loaded / xhr.total * 100) + '% loaded');
@@ -105,37 +128,6 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
     }
 )
     
-const target = new YUKA.GameEntity();
-
-
-
-const path = new YUKA.Path()
-
-path.add(new YUKA.Vector3(-6,0,0))
-path.add(new YUKA.Vector3(-4,0,-4))
-path.add(new YUKA.Vector3(0,0,0))
-path.add(new YUKA.Vector3(4,0,-4))
-path.add(new YUKA.Vector3(6,0,0))
-path.add(new YUKA.Vector3(4,0,4))
-path.add(new YUKA.Vector3(0,0,6))
-
-vehicle.position.copy(path.current())
-
-const followPathBehavior = new YUKA.FollowPathBehavior(path,0.5)
-vehicle.steering.add(followPathBehavior);
-
-
-
-// const seekBehavior = new YUKA.ArriveBehavior(target.position,3,1);
-// vehicle.steering.add(seekBehavior);
-vehicle.position.set(0,0,0)
-vehicle.maxSpeed=3
-
-
-const entityManager = new YUKA.EntityManager();
-entityManager.add(vehicle)
-entityManager.add(target);
-const time = new YUKA.Time()
 
 function animate() {
 	requestAnimationFrame( animate );
@@ -144,8 +136,7 @@ function animate() {
   cube.rotation.z+=0.0005
   cube1.rotation.y-=0.0005
   cube1.rotation.z-=0.0005
-  const delta = time.update().getDelta();
-entityManager.update(delta)
+
  }
 	
 animate()
@@ -309,21 +300,17 @@ arrow1.addEventListener('click', () =>{
 checkStatus('indietro')
 switch(initialCount){
 case(1):{
-target.position.set(10,20,0)
 }
 break;
 case(2):{
-target.position.set(30,20,0)
 
 }
 break;
 case(3):{
-target.position.set(40,20,0)
 
 }
 break;
 case(4):{
-target.position.set(10,200,0)
 
 }
 break;
@@ -333,19 +320,15 @@ break;
             checkStatus('avanti')
             switch(initialCount){
                 case(2):{
-                target.position.set(100,20,0)
                 }
                 break;
                 case(3):{
-                target.position.set(50,200,0)
                 }
                 break;
                 case(4):{
-                target.position.set(10,50,0)
                 }
                 break;
                 case(5):{
-                target.position.set(300,40,0)
                 }
                 break;
                 }
