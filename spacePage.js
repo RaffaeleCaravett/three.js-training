@@ -43,7 +43,9 @@ const target = new YUKA.GameEntity();
 target.setRenderComponent(targetMesh, sync);
 entityManager.add(target);
 
-const seekBehavior = new YUKA.SeekBehavior(target.position);
+
+
+const seekBehavior = new YUKA.ArriveBehavior(target.position,3,3);
 vehicle.steering.add(seekBehavior);
 
 
@@ -127,7 +129,12 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
 model.matrixAutoUpdate=false
 vehicle.scale = new YUKA.Vector3(5, 5, 5);
      model.position.x=-190
-     vehicle.position.x=-100
+     vehicle.position.x=-130
+     vehicle.position.y=-50
+     vehicle.position.z=30
+     target.position.x=-120
+     target.position.y=-50
+     target.position.z=30
         model.rotateY(2)
     },
     (xhr) => {
@@ -309,40 +316,10 @@ checkStatus('')
 
 arrow1.addEventListener('click', () =>{
 checkStatus('indietro')
-switch(initialCount){
-case(1):{
-}
-break;
-case(2):{
-
-}
-break;
-case(3):{
-
-}
-break;
-case(4):{
-
-}
-break;
-}
 })
         arrow2.addEventListener('click', () =>{
             checkStatus('avanti')
-            switch(initialCount){
-                case(2):{
-                }
-                break;
-                case(3):{
-                }
-                break;
-                case(4):{
-                }
-                break;
-                case(5):{
-                }
-                break;
-                }
+    
             })
 
         check1.addEventListener('click', () =>{
