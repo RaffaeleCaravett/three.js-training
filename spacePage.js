@@ -28,7 +28,7 @@ function sync(entity, renderComponent) {
 scene.rotateX(1)
 
 
-vehicle.maxSpeed=10
+vehicle.maxSpeed=30
 
 const entityManager = new YUKA.EntityManager();
 entityManager.add(vehicle);
@@ -129,12 +129,12 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
 model.matrixAutoUpdate=false
 vehicle.scale = new YUKA.Vector3(5, 5, 5);
      model.position.x=-190
-     vehicle.position.x=-130
-     vehicle.position.y=-50
+     vehicle.position.x=-230
+     vehicle.position.y=-52
      vehicle.position.z=30
      target.position.x=-120
      target.position.y=-50
-     target.position.z=30
+     target.position.z=25
         model.rotateY(2)
     },
     (xhr) => {
@@ -229,7 +229,11 @@ switch(initialCount){
         arrow2.style.display='block'
 
         check1.style.display='none'
-    }
+        
+        target.position.x=-120
+        target.position.y=-50
+        target.position.z=30   
+     }
     break;
     case 2 :{
         label1.style.display='none'
@@ -248,6 +252,9 @@ switch(initialCount){
         arrow2.style.display='inline'
 
         check1.style.display='none'
+        target.position.x=-20
+        target.position.y=-0
+        target.position.z=0   
     }
     break;
     case 3 :{
@@ -267,6 +274,9 @@ switch(initialCount){
         arrow2.style.display='inline'
 
         check1.style.display='none'
+        target.position.x=60
+        target.position.y=0
+        target.position.z=-15   
     }
     break;
     case 4 :{
@@ -286,6 +296,9 @@ switch(initialCount){
         arrow2.style.display='inline'
 
         check1.style.display='none'
+        target.position.x=85
+        target.position.y=40
+        target.position.z=-50   
     }
     break;
     case 5 :{
@@ -305,6 +318,9 @@ switch(initialCount){
         arrow2.style.display='none'
 
         check1.style.display='inline'
+        target.position.x=250
+        target.position.y=80
+        target.position.z=-50  
     }
     break;
 
