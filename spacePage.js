@@ -14,16 +14,10 @@ canvas.appendChild( renderer.domElement );
 let pointLights=[]
 let pointLights1=[]
 
-const vehicleGeometry = new THREE.ConeGeometry(0.1, 0.5, 8);
-vehicleGeometry.rotateX(Math.PI * 0.5);
-const vehicleMaterial = new THREE.MeshNormalMaterial();
-const vehicleMesh = new THREE.Mesh(vehicleGeometry, vehicleMaterial);
-vehicleMesh.matrixAutoUpdate = false;
-scene.add(vehicleMesh);
+
 
 const vehicle = new YUKA.Vehicle();
 
-vehicle.setRenderComponent(vehicleMesh, sync);
 
 function sync(entity, renderComponent) {
     renderComponent.matrix.copy(entity.worldMatrix);
@@ -41,7 +35,36 @@ path.add( new YUKA.Vector3(0, 0, 6));
 
 path.loop = true;
 
+scene.rotateX(1)
+
 vehicle.position.copy(path.current());
+
+const followPathBehavior = new YUKA.FollowPathBehavior(path, 0.5);
+vehicle.steering.add(followPathBehavior);
+
+vehicle.maxSpeed=3
+
+const onPathBehavior = new YUKA.OnPathBehavior(path);
+vehicle.steering.add(onPathBehavior);
+
+const entityManager = new YUKA.EntityManager();
+entityManager.add(vehicle);
+
+const position = [];
+for(let i = 0; i < path._waypoints.length; i++) {
+    const waypoint = path._waypoints[i];
+    position.push(waypoint.x, waypoint.y, waypoint.z);
+}
+
+const lineGeometry = new THREE.BufferGeometry();
+lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(position, 3));
+
+const lineMaterial = new THREE.LineBasicMaterial({color: 0xFFFFFF});
+const lines = new THREE.LineLoop(lineGeometry, lineMaterial);
+scene.add(lines);
+
+const time = new YUKA.Time();
+
 
 const ambientLight = new THREE.AmbientLight(0xffffff,0.1)
 scene.add(ambientLight)
@@ -115,9 +138,10 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
     (glb) => {
         model = glb.scene;
         scene.add(model);
-         
-        model.scale.divide(new THREE.Vector3(.09,.09,.09));
-        model.position.x=-190
+        vehicle.setRenderComponent(model, sync);
+model.matrixAutoUpdate=false
+vehicle.scale = new YUKA.Vector3(5, 5, 5);
+     model.position.x=-190
         model.rotateY(2)
     },
     (xhr) => {
@@ -127,7 +151,7 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
         console.error('Error loading GLB model:', error);
     }
 )
-    
+    cube.rotation.set(2,2,0)
 
 function animate() {
 	requestAnimationFrame( animate );
@@ -136,7 +160,8 @@ function animate() {
   cube.rotation.z+=0.0005
   cube1.rotation.y-=0.0005
   cube1.rotation.z-=0.0005
-
+  const delta = time.update().getDelta();
+    entityManager.update(delta);
  }
 	
 animate()
