@@ -23,45 +23,30 @@ function sync(entity, renderComponent) {
     renderComponent.matrix.copy(entity.worldMatrix);
 }
 
-const path = new YUKA.Path();
-path.add( new YUKA.Vector3(-4, 0, 4));
-path.add( new YUKA.Vector3(-6, 0, 0));
-path.add( new YUKA.Vector3(-4, 0, -4));
-path.add( new YUKA.Vector3(0, 0, 0));
-path.add( new YUKA.Vector3(4, 0, -4));
-path.add( new YUKA.Vector3(6, 0, 0));
-path.add( new YUKA.Vector3(4, 0, 4));
-path.add( new YUKA.Vector3(0, 0, 6));
 
-path.loop = true;
 
 scene.rotateX(1)
 
-vehicle.position.copy(path.current());
 
-const followPathBehavior = new YUKA.FollowPathBehavior(path, 0.5);
-vehicle.steering.add(followPathBehavior);
-
-vehicle.maxSpeed=3
-
-const onPathBehavior = new YUKA.OnPathBehavior(path);
-vehicle.steering.add(onPathBehavior);
+vehicle.maxSpeed=10
 
 const entityManager = new YUKA.EntityManager();
 entityManager.add(vehicle);
 
-const position = [];
-for(let i = 0; i < path._waypoints.length; i++) {
-    const waypoint = path._waypoints[i];
-    position.push(waypoint.x, waypoint.y, waypoint.z);
-}
+const targetGeometry = new THREE.SphereGeometry(0.1);
+const targetMaterial = new THREE.MeshPhongMaterial({color: 0xFFEA00});
+const targetMesh = new THREE.Mesh(targetGeometry, targetMaterial);
+targetMesh.matrixAutoUpdate = false;
+scene.add(targetMesh);
 
-const lineGeometry = new THREE.BufferGeometry();
-lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(position, 3));
+const target = new YUKA.GameEntity();
+target.setRenderComponent(targetMesh, sync);
+entityManager.add(target);
 
-const lineMaterial = new THREE.LineBasicMaterial({color: 0xFFFFFF});
-const lines = new THREE.LineLoop(lineGeometry, lineMaterial);
-scene.add(lines);
+const seekBehavior = new YUKA.SeekBehavior(target.position);
+vehicle.steering.add(seekBehavior);
+
+
 
 const time = new YUKA.Time();
 
@@ -142,6 +127,7 @@ loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
 model.matrixAutoUpdate=false
 vehicle.scale = new YUKA.Vector3(5, 5, 5);
      model.position.x=-190
+     vehicle.position.x=-100
         model.rotateY(2)
     },
     (xhr) => {
