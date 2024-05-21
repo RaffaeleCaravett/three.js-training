@@ -402,11 +402,21 @@ if(input1.value&&input1.value.length>0)
             })
 
         check1.addEventListener('click', () =>{
-  target.position.x=-300
+  
+        
+        if(input1.value&&input2.value&&input3.value&&input4.value&&input5.value){
+            error5.style.display='none'
+            target.position.x=-300
         target.position.y=-50
         target.position.z=30 
 
-        vehicle.maxSpeed=200           
+        vehicle.maxSpeed=200  
+            setTimeout(()=>{
+window.location.href='../spaceHome/spaceHome.html'
+            },4000)
+        }else if(!input5.value || input5.value.length==0){
+            error5.style.display='block'
+        }
             })
 
 
