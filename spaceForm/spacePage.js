@@ -1,8 +1,8 @@
-import * as THREE from './node_modules/three/build/three.module.js';
-import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
-import * as dat from './node_modules/dat.gui/build/dat.gui.module.js'; 
-import {GLTFLoader} from "./node_modules/three/examples/jsm/loaders/GLTFLoader.js";
-import * as YUKA from './node_modules/yuka/build/yuka.module.js'
+import * as THREE from 'three';
+import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js';
+import * as dat from '../node_modules/dat.gui/build/dat.gui.module.js'; 
+import {GLTFLoader} from "../node_modules/three/examples/jsm/loaders/GLTFLoader.js";
+import * as YUKA from '../node_modules/yuka/build/yuka.module.js'
 
 const canvas = document.getElementsByClassName('canvas')[0]
 
@@ -122,7 +122,7 @@ for ( let p of pointLights){
 const loader = new GLTFLoader();
 let model;
 let mixer;
-loader.load("./model/spaceship/multi_universe_space_ship_3d_model.glb",
+loader.load("../model/spaceship/multi_universe_space_ship_3d_model.glb",
     (glb) => {
         model = glb.scene;
         scene.add(model);
