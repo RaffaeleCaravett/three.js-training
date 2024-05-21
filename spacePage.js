@@ -161,6 +161,12 @@ function animate() {
   const delta = time.update().getDelta();
     entityManager.update(delta);
     if (mixer) mixer.update(delta);
+
+    let distanceToTarget = vehicle.position.distanceTo(target.position);
+    if (distanceToTarget < 0.00000000000002) {
+        console.log('Vehicle has arrived at the target!');
+    }
+
  }
 	
 animate()
@@ -345,9 +351,11 @@ checkStatus('indietro')
             })
 
         check1.addEventListener('click', () =>{
-            console.log('ok')
-            ()
-            
+  target.position.x=-300
+        target.position.y=-50
+        target.position.z=30 
+
+        vehicle.maxSpeed=200           
             })
 
 

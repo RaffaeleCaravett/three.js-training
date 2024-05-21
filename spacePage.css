@@ -5,6 +5,8 @@ height: 100vh;
     font-style: normal;
     h1{
         font-size: 70px;
+        text-shadow: 3px 2px 1px  black;
+font-weight: bolder;
     }
     .canvas{
         pointer-events:none
