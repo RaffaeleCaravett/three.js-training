@@ -205,12 +205,23 @@ let label3 = document.getElementsByClassName('label')[2]
 let label4 = document.getElementsByClassName('label')[3]
 let label5 = document.getElementsByClassName('label')[4]
 
+let error1 = document.getElementsByClassName('error')[0]
+let error2 = document.getElementsByClassName('error')[1]
+let error3 = document.getElementsByClassName('error')[2]
+let error4 = document.getElementsByClassName('error')[3]
+let error5 = document.getElementsByClassName('error')[4]
 
 let arrow1 = document.getElementsByClassName('arrow')[0]
 let arrow2 = document.getElementsByClassName('arrow')[1]
 let check1 = document.getElementsByClassName('check')[0]
 
 let previousCountValue=0;
+
+error1.style.display='none'
+error2.style.display='none'
+error3.style.display='none'
+error4.style.display='none'
+error5.style.display='none'
 
 
 const checkStatus = (param) => {
@@ -343,10 +354,50 @@ switch(initialCount){
 checkStatus('')
 
 arrow1.addEventListener('click', () =>{
-checkStatus('indietro')
+   checkStatus('indietro')
 })
         arrow2.addEventListener('click', () =>{
+        
+            switch(initialCount){
+                case(1):{
+if(input1.value&&input1.value.length>0)
+       {
+  checkStatus('avanti')
+  error1.style.display='none'
+       }else{
+        error1.style.display='block'
+       }         
+    }
+    break;
+    case(2):{
+        if(input2.value&&input2.value.length>0){
             checkStatus('avanti')
+            error2.style.display='none'
+        }else{
+            error2.style.display='block'
+        }
+                }
+                break;
+                case(3):{
+                    if(input3.value&&input3.value.length>0){
+                        checkStatus('avanti')
+                        error3.style.display='none'
+                    }else{
+                        error3.style.display='block'
+                    }
+                            }
+                            break;
+                            case(4):{
+                                if(input4.value&&input4.value.length>0){
+                                    checkStatus('avanti')
+                                    error4.style.display='none'
+                                }else{
+                                    error4.style.display='block'
+                                }
+                                        }
+                                        break;
+            }
+          
     
             })
 
