@@ -72,7 +72,7 @@ scene.add( cube );
 
     
 for(let i =0 ; i<=5000;i++){
-    const geometry = new THREE.SphereGeometry( 0.25,.5, 0.25 ); 
+    const geometry = new THREE.SphereGeometry( Math.random()*0.25,Math.random()*0.5, Math.random()*0.25 ); 
     const material = new THREE.MeshBasicMaterial( { color: 0xFFD700 } ); 
     const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
 	pointLights.push(sphere)
@@ -99,14 +99,13 @@ for ( let p of pointLights){
     
         
     for(let i =0 ; i<=5000;i++){
-        const geometry = new THREE.SphereGeometry( 0.25,.5, 0.25 ); 
+        const geometry = new THREE.SphereGeometry( Math.random()*0.25,Math.random()*0.5, Math.random()*0.25 ); 
         const material = new THREE.MeshBasicMaterial( { color: 0xFFD700 } ); 
         const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
         pointLights1.push(sphere)
-        
+       
     }
     for ( let p of pointLights1){
-        
         let randomNumberTwentyOne = Math.random()*220-115
         let randomNumberTwentyTwo = Math.random()*221-115.5
         let randomNumberThirty = Math.random()*220-115
@@ -170,6 +169,8 @@ function animate() {
  }
 	
 animate()
+
+
 
 
 window.addEventListener('mousemove',e =>{
