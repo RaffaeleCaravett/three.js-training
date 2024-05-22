@@ -3,7 +3,9 @@ import { OrbitControls } from '../node_modules/three/examples/jsm/controls/Orbit
 import * as dat from '../node_modules/dat.gui/build/dat.gui.module.js'; 
 import {GLTFLoader} from "../node_modules/three/examples/jsm/loaders/GLTFLoader.js";
 import * as YUKA from '../node_modules/yuka/build/yuka.module.js'
-
+import {EffectComposer} from "../node_modules/three/examples/jsm/postprocessing/EffectComposer.js";
+import {RenderPass} from "../node_modules/three/examples/jsm/postprocessing/RenderPass.js";
+import {UnrealBloomPass} from "../node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js";
 const scene = new THREE.Scene();
 // Add fog into scene
 scene.fog = new THREE.FogExp2(0x11111f, 0.002);
@@ -166,33 +168,84 @@ scene.add( light );
 
 
 // Render animation on every rendering phase
+
+setInterval(()=>{
+ 
+    light.intensity=Math.random()*190000
+    light.position.x = Math.random() * 1000 - 500;
+    light.position.y = Math.random() * 1000 - 500; 
+    light.position.z = Math.random() * 1000 - 500;
+
+
+
+    var numPoints = 100;
+
+    let spline = new THREE.SplineCurve([
+       new THREE.Vector3(light.position.x, light.position.y+900, light.position.z),
+       new THREE.Vector3(light.position.x, light.position.y, light.position.z),
+       new THREE.Vector3(light.position.x, light.position.y+700, light.position.z),
+       new THREE.Vector3(light.position.x+110, light.position.y+500, light.position.z+100),
+       new THREE.Vector3(light.position.x, light.position.y+700, light.position.z),
+       new THREE.Vector3(light.position.x, light.position.y+500, light.position.z),
+       new THREE.Vector3(light.position.x-100, light.position.y+400, light.position.z),
+       new THREE.Vector3(light.position.x, light.position.y+500, light.position.z),
+       new THREE.Vector3(light.position.x+200, light.position.y+250, light.position.z),
+       new THREE.Vector3(light.position.x0, light.position.y+400, light.position.z),
+       new THREE.Vector3(light.position.x-150, light.position.y+100, light.position.z),
+
+    ]);
+    
+    var material = new THREE.LineBasicMaterial({
+        color: 0xFFD700,
+    });
+    
+    
+    var splinePoints = spline.getPoints(numPoints);
+    var geometry = new THREE.BufferGeometry().setFromPoints(splinePoints);
+    
+    
+    var line = new THREE.Line(geometry, material);
+    scene.add(line);
+setTimeout(()=>{
+  scene.remove(line)
+},180)
+
+},200)
+
+const composer = new EffectComposer(renderer);
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
+
+const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    1.5, 0.4, 0.85
+);
+bloomPass.threshold = 0;
+bloomPass.strength = 2.0;
+bloomPass.radius = 0;
+composer.addPass(bloomPass);
+
+camera.position.z=200
+// smooth my curve over this many points
 function render() {
   // Cloud Rotation Animation: In the array of clouds rotate the cloud one by one
   cloudParticles1.forEach(p => {
-    p.rotation.z -= 0.0004;
+    p.rotation.z -= 0.0008;
   });
 
   cloudParticles2.forEach(p => {
-    p.rotation.z -=0.0002;
+    p.rotation.z -=0.0004;
   });
 
   cloudParticles3.forEach(p => {
-    p.rotation.z -=0.0003;
+    p.rotation.z -=0.0006;
   });
 
 
   requestAnimationFrame(render);
 
   renderer.render(scene, camera);
+  composer.render()
 }
 
 render();
-setInterval(()=>{
-    light.intensity=Math.random()*1000000
-    light.position.x = Math.random() * 1000 - 500; // Range: -500 to 500
-    light.position.y = Math.random() * 1000 - 500; // Range: -500 to 500
-    light.position.z = Math.random() * 1000 - 500;
-},100)
-
-
-camera.position.z=200
