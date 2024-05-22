@@ -226,6 +226,31 @@ bloomPass.radius = -0.5;
 composer.addPass(bloomPass);
 
 camera.position.z=200
+
+
+
+const loader1 = new GLTFLoader();
+let model;
+loader1.load( '../model/earth/scene.gltf', function ( gltf ) {
+
+  let model = gltf.scene
+	scene.add( model );
+model.position.z=100
+model.position.x=40
+model.position.y=300
+
+setInterval(()=>{
+model.rotateX(0.001)
+model.rotateY(0.001)
+model.rotateZ(0.001)
+},10)
+model.scale.set(80, 80, 80);
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
 // smooth my curve over this many points
 function render() {
   // Cloud Rotation Animation: In the array of clouds rotate the cloud one by one
@@ -240,7 +265,6 @@ function render() {
   cloudParticles3.forEach(p => {
     p.rotation.z -=0.0006;
   });
-
 
   requestAnimationFrame(render);
 
