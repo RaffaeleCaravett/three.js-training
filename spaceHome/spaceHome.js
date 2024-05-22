@@ -221,8 +221,8 @@ const bloomPass = new UnrealBloomPass(
     1.5, 0.4, 0.85
 );
 bloomPass.threshold = 0;
-bloomPass.strength = 2.0;
-bloomPass.radius = 0;
+bloomPass.strength = 4.0;
+bloomPass.radius = -0.5;
 composer.addPass(bloomPass);
 
 camera.position.z=200
