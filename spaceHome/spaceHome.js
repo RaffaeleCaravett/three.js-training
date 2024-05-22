@@ -36,6 +36,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild( renderer.domElement);
 
 /***************************************************** Resizer */
+const controls = new OrbitControls( camera, renderer.domElement );
 
 // Make canvas responsive
 window.addEventListener('resize', () => {
@@ -270,6 +271,8 @@ function render() {
 
   renderer.render(scene, camera);
   composer.render()
+  controls.update();
+
 }
 
 render();
